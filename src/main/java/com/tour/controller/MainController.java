@@ -23,6 +23,6 @@ public class MainController {
     @GetMapping("/test1")
     public String getTest1(Model model) {
         model.addAttribute("users", userService.getAll());
-        return "freemark";
+        return "freemark.html";
     }
 }

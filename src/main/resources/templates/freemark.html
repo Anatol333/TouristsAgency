@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test1 page</title>
+    <!--<link href="/css/main.css" rel="stylesheet">-->
+</head>
+<body>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <ul>
+        <div th:if="${users.empty}">List is empty</div>
+        <div th:each="user: ${users}">
+            <div th:text="${user.id} + ' ' + ${user.username}"/>
+        </div>
+    </ul>
+</body>
+</html>
