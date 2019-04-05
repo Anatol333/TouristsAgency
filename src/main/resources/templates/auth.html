@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication</title>
+</head>
+<body>
+    <form th:action="@{/auth}" th:method="post" th:object="${user}">
+        <input type="text" th:field="*{username}" placeholder="User Name"/><br>
+        <input type="text" th:field="*{password}" placeholder="Your Own Password"/><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

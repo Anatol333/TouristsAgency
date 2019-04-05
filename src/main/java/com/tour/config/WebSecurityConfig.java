@@ -1,5 +1,6 @@
 package com.tour.config;
 
+import com.tour.domain.Role;
 import com.tour.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -33,7 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
+                    .antMatchers("/","/auth").permitAll()
+//                    .antMatchers("/test1","/test2").hasAuthority("USER")
+                    .antMatchers("/admin").hasAuthority("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
