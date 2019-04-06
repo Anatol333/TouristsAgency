@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hello World!</title>
+    <meta charset="UTF-8">
+    <title>Hello Page</title>
+    <style rel="stylesheet">@import "static/css/styles.css";</style>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
+
 <body>
     <h2>Hello page</h2>
     <a href="/test1">Test1</a>
-<!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
-<!--<form th:action="@{/logout}" method="post">-->
-    <!--<input type="submit" value="Sign Out"/>-->
-<!--</form>-->
+    <a href="/test2">Test2</a>
+    <a href="/admin">Admin page</a>
 </body>
 </html>

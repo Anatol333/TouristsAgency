@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Authentication</title>
+    <style rel="stylesheet">@import "static/css/styles.css";</style>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
+<div th:insert="static/header :: copy"></div>
 <body>
     <form th:action="@{/auth}" th:method="post" th:object="${user}">
         <input type="text" th:field="*{username}" placeholder="User Name"/><br>
         <input type="text" th:field="*{password}" placeholder="Your Own Password"/><br>
         <button type="submit">Register</button>
     </form>
+
 </body>
+<div th:insert="static/footer :: copy"></div>
 </html>

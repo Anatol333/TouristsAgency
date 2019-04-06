@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Test1 page</title>
-    <!--<link href="/css/main.css" rel="stylesheet">-->
+    <style rel="stylesheet">@import "static/css/styles.css";</style>
 </head>
 <body>
-
+    <div><h2>Hello dear <label th:text="${authUser}"></label></h2></div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
     </form>

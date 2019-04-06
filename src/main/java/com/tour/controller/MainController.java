@@ -3,14 +3,10 @@ package com.tour.controller;
 import com.tour.domain.User;
 import com.tour.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.annotation.PostConstruct;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
@@ -18,17 +14,16 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    public String getMain(@RequestParam(name = "name", required = false, defaultValue = "World")
-                                  String name, Model model) {
-        model.addAttribute("name", name);
+    @RequestMapping("/")
+    public String getMain() {
         return "hello";
     }
 
     @GetMapping("/test1")
-    public String getTest1(Model model) {
+    public String getTest1(Model model, Authentication authentication) {
         model.addAttribute("users", userService.getAll());
-        return "freemark";
+        model.addAttribute("authUser", authentication.getName());
+        return "test1";
     }
 
     @GetMapping("/auth")
@@ -42,4 +37,5 @@ public class MainController {
         userService.add(user);
         return "redirect:/";
     }
+
 }
