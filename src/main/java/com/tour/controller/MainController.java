@@ -1,6 +1,9 @@
 package com.tour.controller;
 
+import com.tour.domain.Role;
 import com.tour.domain.User;
+import com.tour.domain.UserRole;
+import com.tour.repository.UserRoleRepository;
 import com.tour.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,9 +17,12 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
     @RequestMapping("/")
     public String getMain() {
-        return "hello";
+        return "index";
     }
 
     @GetMapping("/test1")

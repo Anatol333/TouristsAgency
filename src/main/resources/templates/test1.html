@@ -14,7 +14,7 @@
     <ul>
         <div th:if="${users.empty}">List is empty</div>
         <div th:each="user: ${users}">
-            <div th:text="${user.id} + ' ' + ${user.username}"/>
+            <div th:text="${user.id} + ' ' + ${user.username}"></div>
         </div>
     </ul>
 </body>
