@@ -17,8 +17,6 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRoleRepository userRoleRepository;
 
     @RequestMapping("/")
     public String getMain() {
