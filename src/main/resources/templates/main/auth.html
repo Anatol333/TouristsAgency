@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <div th:insert="static/head :: copy"></div>
+    <title>Material Design Bootstrap</title>
+</head>
+
+<header>
+    <div th:insert="static/header :: copy"></div>
+</header>
+
+<body>
+<!--<div class="custom-my-container">-->
+    <!--<form th:action="@{/auth}" th:method="post" th:object="${user}">-->
+        <!--<input type="text" th:field="*{username}" placeholder="User Name"/><br>-->
+        <!--<input type="text" th:field="*{password}" placeholder="Your Own Password"/><br>-->
+        <!--<button type="submit">Register</button>-->
+    <!--</form>-->
+<!--</div>-->
+
+<!--START-->
+<div class="container-fluid custom-my-container mt-4">
+    <div class="row">
+        <div class="col black pl-5 text-white pt-5" style="width: 35rem;">
+            <h3>Lorem ipsum dolor.</h3>
+            <p class="w-50 pt-5">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aliquam corporis distinctio est explicabo mollitia. Amet?
+            </p>
+        </div>
+        <div class="col">
+            <div class="register-padding">
+                <div class="text-center mb-3 w-75">
+                    <h4 class="font-weight-bold">Register</h4>
+                </div>
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+                <form th:action="@{/auth}" th:method="post" th:object="${user}" class="w-75">
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input th:field="*{username}" type="text" id="materialFormCardNameEx" class="form-control" name="username">
+                        <label for="materialFormCardNameEx" class="font-weight-light">User Name</label>
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input  th:field="*{Email}" type="text" id="materialFormCardEmailEx" class="form-control" name="Email">
+                        <label for="materialFormCardEmailEx" class="font-weight-light">Email</label>
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input  th:field="*{Name}" type="text" id="materialFormCardRealNameEx" class="form-control" name="Name">
+                        <label for="materialFormCardRealNameEx" class="font-weight-light">First Name</label>
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input  th:field="*{Surname}" type="text" id="materialFormCardSurnameEx" class="form-control" name="Surname">
+                        <label for="materialFormCardSurnameEx" class="font-weight-light">Surname</label>
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input  th:field="*{password}" type="text" id="materialFormCardPasswordEx" class="form-control" name="password">
+                        <label for="materialFormCardPasswordEx" class="font-weight-light">Password</label>
+                    </div>
+
+                    <div class="text-center py-4 mt-3">
+                        <button class="btn btn-danger" type="submit">Register</button>
+                    </div>
+                    <!--<input type="text" th:field="*{username}" placeholder="User Name"/><br>-->
+                    <!--<input type="text" th:field="*{Email}" placeholder="Email"/><br>-->
+                    <!--<input type="text" th:field="*{Name}" placeholder="Input your real Name"/><br>-->
+                    <!--<input type="text" th:field="*{password}" placeholder="Input your real Surname"/><br>-->
+                    <!--<input type="text" th:field="*{password}" placeholder="Password"/><br>-->
+                    <!--<button type="submit">Register</button>-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="static/js/main-search.js"></script>
+
+<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+</body>
+
+<!-- Footer -->
+<footer>
+    <div th:insert="static/footer :: copy"></div>
+</footer>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <div th:insert="static/head :: copy"></div>
+    <title>Material Design Bootstrap</title>
+</head>
+
+<header>
+    <div th:insert="static/header :: copy"></div>
+</header>
+
+<body>
+
+<!--START-->
+<div class="container-fluid custom-my-container mt-4">
+    <div class="row">
+        <div class="col black pl-5 text-white pt-5" style="width: 35rem;">
+            <h3>Lorem ipsum dolor.</h3>
+            <p class="w-50 pt-5">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aliquam corporis distinctio est explicabo mollitia. Amet?
+            </p>
+        </div>
+        <div class="col">
+            <div class="register-padding">
+                <div class="text-center mb-3 w-75">
+                    <h4 class="font-weight-bold">Sign In</h4>
+                </div>
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+                <form th:action="@{/login}" method="post" class ="w-75">
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="materialFormCardNameEx" class="form-control" name="username">
+                        <label for="materialFormCardNameEx" class="font-weight-light">User Name</label>
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="text" id="materialFormCardPasswordExx" class="form-control" name="password">
+                        <label for="materialFormCardPasswordExx" class="font-weight-light">Password</label>
+                    </div>
+                    <div class="text-center py-4 mt-3">
+                        <button class="btn btn-danger" type="submit">Login</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3 w-75">
+                    <a href="/auth">Haven't account? Create!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="static/js/main-search.js"></script>
+
+<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+</body>
+
+<!-- Footer -->
+<footer>
+    <div th:insert="static/footer :: copy"></div>
+</footer>
+
+</html>

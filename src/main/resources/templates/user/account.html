@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+    <div th:object = "${user}">
+        <h5>Created for example getting pages from id</h5>
+        Other Info about user (Account page):<br>
+        <div th:text="*{id} + ' ' + *{username} + ' ' + *{Name} + ' ' + *{Surname} + ' ' + *{Email}"></div>
+    </div>
+</body>
+</html>

@@ -18,21 +18,32 @@ public class User implements UserDetails {
     private String username;
 
     private String password;
-//
-//    private String name;
-//
-//    private String sername;
-//
-//    private String age;
+
+    private String Email;
+
+    private String Name;
+
+    private String Surname;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    // Methods and Constructors
     public User(String username) {
         this.username = username;
     }
+
+    public User(String username, String password, String email, String name, String surname, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        Email = email;
+        Name = name;
+        Surname = surname;
+        this.roles = roles;
+    }
+
     public User() { }
 
 
@@ -93,5 +104,29 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getSurname() {
+        return Surname;
+    }
+
+    public void setSurname(String surname) {
+        Surname = surname;
     }
 }

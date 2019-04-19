@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -39,11 +40,20 @@ public class UserService implements UserDetailsService  {
         return userRepository.findByUsername(username);
     }
 
+    public User loadUserById(Integer id) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findById(id);
+        return user.get();
+    }
+
+
 
     // Custom methods for User
 
     @Transactional
     public void add(User user) {
+//        user.setEmail(null);
+//        user.setName(null);
+//        user.setSurname(null);
         userRepository.save(user);
         userRoleRepository.save(new UserRole(user.getId(), Role.USER.toString()));
     }

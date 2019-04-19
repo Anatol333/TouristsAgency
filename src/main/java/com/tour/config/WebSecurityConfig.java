@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/auth").permitAll()
     //              .antMatchers("/test1","/test2").hasAuthority("USER")
                     .antMatchers("/admin").hasAuthority("ADMIN")
+                    .antMatchers("/account/*").permitAll()
                     .antMatchers("/static/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/static/**").permitAll()
@@ -39,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                     .logout()
+                    .logoutSuccessUrl("/")
                     .permitAll();
     }
 

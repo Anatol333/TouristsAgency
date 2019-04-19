@@ -93,4 +93,11 @@ body,
 .search > div > input:valid {
     width: 250px;
 }
+.custom-my-container {
+    padding-top: 5%;
+}
+.register-padding {
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
 

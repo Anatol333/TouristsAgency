@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
 <div th:fragment="copy">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light black scrolling-navbar nav-txt-clr">
@@ -46,14 +46,9 @@
                             <i class="fab fa-youtube text-white"></i>
                         </a>
                     </li>
-                    <!--<li class="nav-item ml-4">-->
-                    <!--<a href="#" class="nav-link waves-effect-->
-                    <!--font-weight-bolder bg-primary">-->
-                    <!--SIGN-IN-->
-                    <!--</a>-->
-                    <!--</li>-->
                 </ul>
-                <a href="#" class="btn btn-outline-danger btn-rounded ml-4">SIGN IN</a>
+
+                <a href="/test1" class="btn btn-outline-danger btn-rounded ml-4" th:text="${authButton}"></a>
             </div>
         </div>
     </nav>
