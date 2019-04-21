@@ -47,7 +47,7 @@ public class MainController {
         userService.add(user);
         return "redirect:/";
     }
-    
+
     @GetMapping("/login")
     public String getLogin(Model model) {
         model.addAttribute("authButton", "SIGN IN");
@@ -58,5 +58,10 @@ public class MainController {
     @GetMapping("/about")
     public String getAbout() {
         return "main/about";
+    }
+
+    @GetMapping("/acc")
+    public String getAcc() {
+        return "user/acc";
     }
 }

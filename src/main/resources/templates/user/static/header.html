@@ -47,8 +47,10 @@
                         </a>
                     </li>
                 </ul>
-
-                <a href="/acc" class="btn btn-outline-danger btn-rounded ml-4" th:text="${authButton}"></a>
+                <form th:action="@{/logout}" method="post" style="outline: none;">
+                    <input type="submit" class ="btn btn-outline-danger btn-rounded ml-4"
+                           value="Sign Out"/>
+                </form>
             </div>
         </div>
     </nav>
