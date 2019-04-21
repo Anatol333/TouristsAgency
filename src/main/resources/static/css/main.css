@@ -101,3 +101,9 @@ body,
     padding-bottom: 20%;
 }
 
+.image-custom{
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

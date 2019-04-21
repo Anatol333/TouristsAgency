@@ -18,7 +18,6 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    private Authentication authentication;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getMain(Model model, HttpServletRequest request) {
@@ -31,7 +30,9 @@ public class MainController {
     @GetMapping("/test1")
     public String getTest1(Model model, Authentication authentication) {
         model.addAttribute("users", userService.getAll());
-        model.addAttribute("authUser", authentication.getName());
+        model.addAttribute("authUser",userService.loadUserByUsername(
+                authentication.getName()
+        ));
         return "test1";
     }
 
@@ -58,10 +59,5 @@ public class MainController {
     @GetMapping("/about")
     public String getAbout() {
         return "main/about";
-    }
-
-    @GetMapping("/acc")
-    public String getAcc() {
-        return "user/acc";
     }
 }

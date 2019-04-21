@@ -10,6 +10,7 @@ import com.tour.repository.UserRepository;
 import com.tour.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,17 @@ public class UserController {
     @Autowired
     private CityRepository cityRepository;
 
+
+    @GetMapping("/acc")
+    public String getAcc(Model model, Authentication authentication) {
+        model.addAttribute("user", userService.loadUserByUsername(
+                authentication.getName()
+        ));
+        return "user/acc";
+    }
+
+    // For admin pages
+
     @GetMapping("/admin")
     public String getAdminData(Model model) {
         model.addAttribute("country", new Country());
@@ -38,17 +50,6 @@ public class UserController {
         model.addAttribute("list",countryRepository.findAll());
         return "private";
     }
-//    @PostMapping("/admin")
-//    public String postAdminData(
-//            @ModelAttribute("city") City city, BindingResult cityResult,
-//            @ModelAttribute("country") Country country, BindingResult countryResult
-//    ) {
-//        if(!cityResult.hasErrors() && city != null)
-//            cityRepository.save(city);
-//        if(!countryResult.hasErrors() && country != null)
-//            countryRepository.save(country);
-//        return "redirect:/admin";
-//    }
 
     @PostMapping("/admin/country")
     public String saveCountry(@ModelAttribute Country country) {

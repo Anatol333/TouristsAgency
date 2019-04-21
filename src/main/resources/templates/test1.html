@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Test1 page</title>
-    <style rel="stylesheet">@import "static/css/styles.css";</style>
 </head>
 <body>
-    <div><h2>Hello dear <label th:text="${authUser}"></label></h2></div>
+    <div><h2>Hello dear <label th:object="${authUser}">
+        <label th:text="${authUser.username}"></label>
+    </label></h2></div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
     </form>
