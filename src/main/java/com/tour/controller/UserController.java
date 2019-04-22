@@ -41,26 +41,8 @@ public class UserController {
         return "user/acc";
     }
 
-    // For admin pages
 
-    @GetMapping("/admin")
-    public String getAdminData(Model model) {
-        model.addAttribute("country", new Country());
-        model.addAttribute("city", new City());
-        model.addAttribute("list",countryRepository.findAll());
-        return "private";
-    }
-
-    @PostMapping("/admin/country")
-    public String saveCountry(@ModelAttribute Country country) {
-        countryRepository.save(country);
-        return "redirect:/admin";
-    }
-    @PostMapping("/admin/city")
-    public String saveCountry(@ModelAttribute City city) {
-        cityRepository.save(city);
-        return "redirect:/admin";
-    }
+    // Testing pages ...
 
     @GetMapping("/test2")
     public String getNotPrivateData() {

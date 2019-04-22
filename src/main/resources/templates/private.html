@@ -6,11 +6,12 @@
     <title>ADMIN PAGE</title>
 </head>
 
+
 <body>
 <h2 class="text-center">Admin control panel</h2>
 
 <div class="container mt-4">
-    <div class="row">
+    <div class="row w-100">
         <div class="col-auto">
             <h3>Adding country</h3>
             <form action="#" th:action="@{/admin/country}" th:object="${country}" method="post">
@@ -36,8 +37,27 @@
                 <p><input type="submit" value="Submit"/></p>
             </form>
         </div>
+        <div class="col-auto">
+            <h3>Adding City Sights</h3>
+            <form action="#" th:action="@{/admin/sight}" th:object="${sight}" method="post" multiple="multiple">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                City
+                <p>
+                    <select th:field="*{ID_City}">
+                        <option th:each="i : ${list_city}"
+                                th:value="${i.ID_City}"
+                                th:text="${i.City_Name}">
+                        </option>
+                    </select>
+                </p>
+                Name Sight
+                <p><input type="text" th:field="*{Name_Sight}"/></p>
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
     </div>
 </div>
+
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
