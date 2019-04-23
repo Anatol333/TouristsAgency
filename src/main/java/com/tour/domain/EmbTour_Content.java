@@ -1,19 +1,18 @@
 package com.tour.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Embeddable
-@Table(name = "Tour_Content")
-public class Tour_Content {
+public class EmbTour_Content implements Serializable {
 
-    @Id
     private Integer ID_City;
     private Integer ID_Tour;
 
-    public Tour_Content() {
+    public EmbTour_Content() {
     }
 
-    public Tour_Content(Integer ID_City, Integer ID_Tour) {
+    public EmbTour_Content(Integer ID_City, Integer ID_Tour) {
         this.ID_City = ID_City;
         this.ID_Tour = ID_Tour;
     }

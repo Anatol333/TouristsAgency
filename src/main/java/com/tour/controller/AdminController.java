@@ -1,11 +1,7 @@
 package com.tour.controller;
 
-import com.tour.domain.City;
-import com.tour.domain.Country;
-import com.tour.domain.Sight;
-import com.tour.repository.CityRepository;
-import com.tour.repository.CountryRepository;
-import com.tour.repository.SightRepository;
+import com.tour.domain.*;
+import com.tour.repository.*;
 import com.tour.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +25,12 @@ public class AdminController {
     @Autowired
     private SightRepository sightRepository;
 
+    @Autowired
+    private TourRepository tourRepository;
+
+    @Autowired
+    private TourContentRepository tourContentRepository;
+
     // For admin pages
 
     @GetMapping("/admin")
@@ -41,6 +43,12 @@ public class AdminController {
         // Adding sight
         model.addAttribute("sight",new Sight());
         model.addAttribute("list_city", cityRepository.findAll());
+        // Adding Tour
+        model.addAttribute("tour", new Tour());
+        // Adding Tour Content
+        model.addAttribute("tour_content", new Tour_Content());
+        model.addAttribute("list_tour", tourRepository.findAll());
+
         return "private";
     }
 
@@ -59,6 +67,18 @@ public class AdminController {
     @PostMapping("/admin/sight")
     public String saveCountry(@ModelAttribute Sight sight) {
         sightRepository.save(sight);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/tour")
+    public String saveCountry(@ModelAttribute Tour tour) {
+        tourRepository.save(tour);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/tour_content")
+    public String saveCountry(@ModelAttribute Tour_Content tourContent) {
+        tourContentRepository.save(tourContent);
         return "redirect:/admin";
     }
 }

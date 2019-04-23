@@ -8,10 +8,10 @@
 
 
 <body>
-<h2 class="text-center">Admin control panel</h2>
+<h2 class="text-center bg-danger text-white">Admin control panel</h2>
 
 <div class="container mt-4">
-    <div class="row w-100">
+    <div class="row w-100" style="background-color: rgba(26,170,39,0.67);">
         <div class="col-auto">
             <h3>Adding country</h3>
             <form action="#" th:action="@{/admin/country}" th:object="${country}" method="post">
@@ -52,6 +52,48 @@
                 </p>
                 Name Sight
                 <p><input type="text" th:field="*{Name_Sight}"/></p>
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+    </div>
+    <div class="row w-100" style="background-color: rgba(35,166,170,0.67);">
+        <div class="col-auto">
+            <h3>Add MAIN Tour</h3>
+            <form action="#" th:action="@{/admin/tour}" th:object="${tour}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Total Price Tour
+                <p><input type="text" th:field="*{Total_Price}"/></p>
+                Date Start
+                <p><input type="text" th:field="*{Date_Start}"/></p>
+                Date End
+                <p><input type="text" th:field="*{Date_End}"/></p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+        <div class="col-auto">
+            <h3>Adding Tour Content</h3>
+            <form action="#" th:action="@{/admin/tour_content}" th:object="${tour_content}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                City
+                <p>
+                    <select th:field="*{ID_City}">
+                        <option th:each="i : ${list_city}"
+                                th:value="${i.ID_City}"
+                                th:text="${i.City_Name}">
+                        </option>
+                    </select>
+                </p>
+                Tour
+                <p>
+                    <select th:field="*{ID_Tour}">
+                        <option th:each="i : ${list_tour}"
+                                th:value="${i.ID_Tour}"
+                                th:text="${i.ID_Tour}">
+                        </option>
+                    </select>
+                </p>
+
                 <p><input type="submit" value="Submit"/></p>
             </form>
         </div>
