@@ -130,6 +130,68 @@
             </form>
         </div>
     </div>
+    <div class="row w-100" style="background-color: rgba(89,89,170,0.67);">
+        <div class="col-auto">
+            <h3>Add Hotel</h3>
+            <form action="#" th:action="@{/admin/hotel}" th:object="${hotel}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Name Hotel
+                <p><input type="text" th:field="*{Name_Hotel}"/></p>
+                City
+                <p>
+                    <select th:field="*{ID_City}">
+                        <option th:each="i : ${list_city}"
+                                th:value="${i.ID_City}"
+                                th:text="${i.City_Name}">
+                        </option>
+                    </select>
+                </p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+        <div class="col-auto">
+            <h3>Add Room Type</h3>
+            <form action="#" th:action="@{/admin/roomtype}" th:object="${room_type}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Room Type Name
+                <p><input type="text" th:field="*{Name_Type}"/></p>
+                Type Price
+                <p><input type="text" th:field="*{Price}"/></p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+        <div class="col-auto">
+            <h3>Add Room Type</h3>
+            <form action="#" th:action="@{/admin/room}" th:object="${room}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Hotel
+                <p>
+                    <select th:field="*{ID_Hotel}">
+                        <option th:each="i : ${list_hotel}"
+                                th:value="${i.ID_Hotel}"
+                                th:text="${i.ID_Hotel} + ' ' + ${i.Name_Hotel}">
+                        </option>
+                    </select>
+                </p>
+                Room Type
+                <p>
+                    <select th:field="*{ID_Room_Type}">
+                        <option th:each="i : ${list_type}"
+                                th:value="${i.ID_Room_Type}"
+                                th:text="${i.ID_Room_Type} + ' ' + ${i.Name_Type}">
+                        </option>
+                    </select>
+                </p>
+                Room Price
+                <p><input type="text" th:field="*{Room_Price}"/></p>
+
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+    </div>
 </div>
 
 

@@ -34,6 +34,15 @@ public class AdminController {
     @Autowired
     private CityTourRepository cityTourRepository;
 
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
+
     // For admin pages
 
     @GetMapping("/admin")
@@ -54,6 +63,14 @@ public class AdminController {
         // Adding City Tour
         model.addAttribute("city_tour", new City_Tour());
         model.addAttribute("list_sight", sightRepository.findAll());
+        // Adding Hotel
+        model.addAttribute("hotel", new Hotel());
+        // Adding Room
+        model.addAttribute("room",new Room());
+        model.addAttribute("list_hotel", hotelRepository.findAll());
+        model.addAttribute("list_type", roomTypeRepository.findAll());
+        // Adding Room Type
+        model.addAttribute("room_type", new Room_Type());
 
         return "private";
     }
@@ -67,32 +84,49 @@ public class AdminController {
     }
 
     @PostMapping("/admin/city")
-    public String saveCountry(@ModelAttribute City city) {
+    public String saveCity(@ModelAttribute City city) {
         cityRepository.save(city);
         return "redirect:/admin";
     }
 
     @PostMapping("/admin/sight")
-    public String saveCountry(@ModelAttribute Sight sight) {
+    public String saveSight(@ModelAttribute Sight sight) {
         sightRepository.save(sight);
         return "redirect:/admin";
     }
 
     @PostMapping("/admin/tour")
-    public String saveCountry(@ModelAttribute Tour tour) {
+    public String saveTour(@ModelAttribute Tour tour) {
         tourRepository.save(tour);
         return "redirect:/admin";
     }
 
     @PostMapping("/admin/tour_content")
-    public String saveCountry(@ModelAttribute Tour_Content tourContent) {
+    public String saveTourContent(@ModelAttribute Tour_Content tourContent) {
         tourContentRepository.save(tourContent);
         return "redirect:/admin";
     }
 
     @PostMapping("/admin/city_tour")
-    public String saveCountry(@ModelAttribute City_Tour city_tour) {
+    public String saveCityTour(@ModelAttribute City_Tour city_tour) {
         cityTourRepository.save(city_tour);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/hotel")
+    public String saveHotel(@ModelAttribute Hotel hotel) {
+        hotelRepository.save(hotel);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/roomtype")
+    public String saveRoomType(@ModelAttribute Room_Type roomType) {
+        roomTypeRepository.save(roomType);
+        return "redirect:/admin";
+    }
+    @PostMapping("/admin/room")
+    public String saveRoomType(@ModelAttribute Room room) {
+        roomRepository.save(room);
         return "redirect:/admin";
     }
 }
