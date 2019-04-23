@@ -97,6 +97,38 @@
                 <p><input type="submit" value="Submit"/></p>
             </form>
         </div>
+        <div class="col-auto">
+            <h3>Adding City Tour</h3>
+            <form action="#" th:action="@{/admin/city_tour}" th:object="${city_tour}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                City
+                <p>
+                    <select th:field="*{ID_City}">
+                        <option th:each="i : ${list_city}"
+                                th:value="${i.ID_City}"
+                                th:text="${i.ID_City}+' '+${i.City_Name}">
+                        </option>
+                    </select>
+                </p>
+                Sight
+                <p>
+                    <select th:field="*{ID_Sight}">
+                        <option th:each="i : ${list_sight}"
+                                th:value="${i.ID_Sight}"
+                                th:text="'ID City: '+ ${i.ID_City} + ' ' + ${i.Name_Sight}">
+                        </option>
+                    </select>
+                </p>
+                Local Price
+                <p><input type="text" th:field="*{Local_Price}"/></p>
+                Time Start
+                <p><input type="text" th:field="*{Time_Start}"/></p>
+                Time End
+                <p><input type="text" th:field="*{Time_End}"/></p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
     </div>
 </div>
 

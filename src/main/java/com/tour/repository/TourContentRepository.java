@@ -1,6 +1,6 @@
 package com.tour.repository;
 
-import com.tour.domain.EmbTour_Content;
+import com.tour.domain.embeddable.EmbTour_Content;
 import com.tour.domain.Tour_Content;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -31,6 +31,9 @@ public class AdminController {
     @Autowired
     private TourContentRepository tourContentRepository;
 
+    @Autowired
+    private CityTourRepository cityTourRepository;
+
     // For admin pages
 
     @GetMapping("/admin")
@@ -41,17 +44,22 @@ public class AdminController {
         model.addAttribute("city", new City());
         model.addAttribute("list", countryRepository.findAll());
         // Adding sight
-        model.addAttribute("sight",new Sight());
+        model.addAttribute("sight", new Sight());
         model.addAttribute("list_city", cityRepository.findAll());
         // Adding Tour
         model.addAttribute("tour", new Tour());
         // Adding Tour Content
         model.addAttribute("tour_content", new Tour_Content());
         model.addAttribute("list_tour", tourRepository.findAll());
+        // Adding City Tour
+        model.addAttribute("city_tour", new City_Tour());
+        model.addAttribute("list_sight", sightRepository.findAll());
 
         return "private";
     }
 
+
+    // Admin redirect pages
     @PostMapping("/admin/country")
     public String saveCountry(@ModelAttribute Country country) {
         countryRepository.save(country);
@@ -79,6 +87,12 @@ public class AdminController {
     @PostMapping("/admin/tour_content")
     public String saveCountry(@ModelAttribute Tour_Content tourContent) {
         tourContentRepository.save(tourContent);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/city_tour")
+    public String saveCountry(@ModelAttribute City_Tour city_tour) {
+        cityTourRepository.save(city_tour);
         return "redirect:/admin";
     }
 }

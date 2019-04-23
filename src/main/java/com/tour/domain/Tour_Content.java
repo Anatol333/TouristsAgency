@@ -1,5 +1,7 @@
 package com.tour.domain;
 
+import com.tour.domain.embeddable.EmbTour_Content;
+
 import javax.persistence.*;
 
 @Entity

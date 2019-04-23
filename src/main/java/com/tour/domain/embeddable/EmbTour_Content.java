@@ -1,4 +1,4 @@
-package com.tour.domain;
+package com.tour.domain.embeddable;
 
 import javax.persistence.*;
 import java.io.Serializable;
