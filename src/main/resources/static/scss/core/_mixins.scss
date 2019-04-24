@@ -65,7 +65,7 @@
   }
 }
 
-// Media between the breakpoint's minimum and maximum widths.
+// Media between the breakpoint'Services minimum and maximum widths.
 // No minimum for the smallest breakpoint, and no maximum for the largest one.
 // Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
 @mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
@@ -231,7 +231,7 @@
   border: 0;
 }
 
-// Use in conjunction with .sr-only to only display content when it's focused.
+// Use in conjunction with .sr-only to only display content when it'Services focused.
 //
 // Useful for "Skip to main content" links; see https://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
 //

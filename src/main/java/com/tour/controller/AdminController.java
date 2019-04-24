@@ -52,6 +52,12 @@ public class AdminController {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
+    @Autowired
+    private ServicesRepository servicesRepository;
+
+    @Autowired
+    private RoomServiceRepository roomServiceRepository;
+
     // For admin pages
 
     @GetMapping("/admin")
@@ -85,12 +91,26 @@ public class AdminController {
         model.addAttribute("list_type", roomTypeRepository.findAll());
         // Adding Room Type
         model.addAttribute("room_type", new Room_Type());
+        // Adding Services
+        model.addAttribute("services", new Services());
+        // Adding Room Service
+        model.addAttribute("room_service", new Room_Service());
+        model.addAttribute("list_room", roomRepository.findAll());
+        model.addAttribute("list_service", servicesRepository.findAll());
 
         return "private";
     }
 
 
     // Admin redirect pages
+    @PostMapping("/admin/userrole")
+    public String saveUserRole(@ModelAttribute UserRole userRole) {
+        if(userRoleRepository.findById(userRole.getUser_id()).get().getRoles() != userRole.getRoles()) {
+            userRoleRepository.save(userRole);
+        }
+        return "redirect:/admin";
+    }
+
     @PostMapping("/admin/country")
     public String saveCountry(@ModelAttribute Country country) {
         countryRepository.save(country);
@@ -143,11 +163,15 @@ public class AdminController {
         roomRepository.save(room);
         return "redirect:/admin";
     }
-    @PostMapping("/admin/userrole")
-    public String saveUserRole(@ModelAttribute UserRole userRole) {
-        if(userRoleRepository.findById(userRole.getUser_id()).get().getRoles() != userRole.getRoles()) {
-            userRoleRepository.save(userRole);
-        }
+
+    @PostMapping("/admin/services")
+    public String saveServices(@ModelAttribute Services services) {
+        servicesRepository.save(services);
+        return "redirect:/admin";
+    }
+    @PostMapping("/admin/room_services")
+    public String saveServices(@ModelAttribute Room_Service room_service) {
+        roomServiceRepository.save(room_service);
         return "redirect:/admin";
     }
 }

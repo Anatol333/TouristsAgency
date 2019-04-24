@@ -213,6 +213,52 @@
                 <p><input type="submit" value="Submit"/></p>
             </form>
         </div>
+        <div class="col-auto">
+            <h3>Add Service</h3>
+            <form action="#" th:action="@{/admin/services}" th:object="${services}" method="post">
+                <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Name Service
+                <p><input type="text" th:field="*{Name_Service}"/></p>
+                Price Service
+                <p><input type="text" th:field="*{Price_Service}"/></p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+        <div class="col-auto">
+            <h3>Add Room Service</h3>
+            <form action="#" th:action="@{/admin/room_services}" th:object="${room_service}" method="post">
+                Hotel
+                <p>
+                    <select th:field="*{ID_Hotel}">
+                        <option th:each="i : ${list_hotel}"
+                                th:value="${i.ID_Hotel}"
+                                th:text="${i.ID_Hotel} + ' ' + ${i.Name_Hotel}">
+                        </option>
+                    </select>
+                </p>
+                Room
+                <p>
+                    <select th:field="*{ID_Room}">
+                        <option th:each="i : ${list_room}"
+                                th:value="${i.ID_Room}"
+                                th:text="'ID Hotel: '+${i.ID_Hotel}+' ID Room: '+${i.ID_Room}">
+                        </option>
+                    </select>
+                </p>
+                Service
+                <p>
+                    <select th:field="*{ID_Service}">
+                        <option th:each="i : ${list_service}"
+                                th:value="${i.ID_Service}"
+                                th:text="${i.Name_Service} + ' ' + ${i.Price_Service}">
+                        </option>
+                    </select>
+                </p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
     </div>
 </div>
 
