@@ -11,6 +11,28 @@
 <h2 class="text-center bg-danger text-white">Admin control panel</h2>
 
 <div class="container mt-4">
+
+    <div class="row w-100" style="background-color: rgba(170,162,55,0.67);">
+        <div class="col-auto">
+            <h3>User Info</h3>
+            <form action="#" th:action="@{/admin/userrole}" th:object="${user_role}" method="post">
+                <!--<p>Id: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Input User ID
+                <p><input type="text" th:field="*{user_id}"/></p>
+                Check Roles
+                <p>
+                    <select th:field="*{roles}">
+                        <option th:each="i : ${roles}"
+                                th:value="${i}"
+                                th:text="${i}">
+                        </option>
+                    </select>
+                </p>
+
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+    </div>
     <div class="row w-100" style="background-color: rgba(26,170,39,0.67);">
         <div class="col-auto">
             <h3>Adding country</h3>

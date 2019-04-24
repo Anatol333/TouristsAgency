@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Controller
 public class AdminController {
 
@@ -43,10 +49,18 @@ public class AdminController {
     @Autowired
     private RoomTypeRepository roomTypeRepository;
 
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
     // For admin pages
 
     @GetMapping("/admin")
     public String getAdminData(Model model) {
+        // Adding/Update User Role
+        model.addAttribute("user_role", new UserRole());
+        model.addAttribute("roles", Stream.of(Role.values())
+                .map(Role::name)
+                .collect(Collectors.toList()));
         // Adding country
         model.addAttribute("country", new Country());
         // Adding city
@@ -127,6 +141,13 @@ public class AdminController {
     @PostMapping("/admin/room")
     public String saveRoomType(@ModelAttribute Room room) {
         roomRepository.save(room);
+        return "redirect:/admin";
+    }
+    @PostMapping("/admin/userrole")
+    public String saveUserRole(@ModelAttribute UserRole userRole) {
+        if(userRoleRepository.findById(userRole.getUser_id()).get().getRoles() != userRole.getRoles()) {
+            userRoleRepository.save(userRole);
+        }
         return "redirect:/admin";
     }
 }
