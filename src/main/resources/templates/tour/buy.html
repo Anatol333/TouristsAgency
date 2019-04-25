@@ -1,10 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <div th:insert="static/head :: copy"></div>
+    <title>Material Design Bootstrap</title>
 </head>
+
+<header>
+    <div th:insert="static/header :: copy"></div>
+</header>
+
 <body>
-$END$
+<!--START-->
+<div class="custom-my-container mt-4">
+    <div class="container-fluid clear-mp-fix">
+        <!--<form class="w-100" th:action="@{/buy/search_city}"-->
+        <!--th:object="${city_name}"-->
+        <!--method="post">-->
+        <!--<div class="flexbox text-white pt-4 pb-4 align-items-center">-->
+        <!--<div class="search">-->
+        <!--<h4>Input your city departure for starting travel!</h4>-->
+        <!--<div class="d-flex justify-content-center">-->
+        <!--<input type="text" placeholder="Search . . ." required>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</form>-->
+        <div class="row">
+            <div class="col-4 black text-white text-center">
+                <div class="pl-4">
+                    <h3>Finding by filters:</h3>
+
+                    <div class="text-white pt-2 pb-2 align-items-center">
+                        Input city departure:
+                        <div class="search">
+                            <div class="d-flex justify-content-center">
+                                <input type="text" placeholder="Search . . ." required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-white pt-2 pb-2 align-items-center">
+                        Less Than:
+                        <div class="search">
+                            <div class="d-flex justify-content-center">
+                                <input type="text" placeholder="Search . . ." required>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-outline-danger btn-rounded" value="Search...">
+                </div>
+            </div>
+            <div class="col">
+                <label th:text="${filter_price}"></label>
+                <label th:text="${depcity}"></label>
+                <div th:if="${tour.empty}">List is empty</div>
+                <div th:each="t: ${tour}">
+                    Some Tour #
+                    <div th:text="${t.ID_Tour} + ' Price: ' + ${t.Price}">
+                    </div>
+                    <div th:each="tc: ${tour_content}">
+                        Tour_Content
+                        <div th:text="'ID_City: '+${tc.ID_City}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="static/js/main-search.js"></script>
+
+<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="static/js/mdb.min.js"></script>
+
 </body>
+
+<!-- Footer -->
+<footer>
+    <div th:insert="static/footer :: copy"></div>
+</footer>
+
 </html>

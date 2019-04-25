@@ -84,7 +84,7 @@
             <form action="#" th:action="@{/admin/tour}" th:object="${tour}" method="post">
                 <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
                 Total Price Tour
-                <p><input type="text" th:field="*{Total_Price}"/></p>
+                <p><input type="text" th:field="*{Price}"/></p>
                 Date Start
                 <p><input type="text" th:field="*{Date_Start}"/></p>
                 Date End
@@ -245,6 +245,7 @@
                                 th:text="'ID Hotel: '+${i.ID_Hotel}+' ID Room: '+${i.ID_Room}">
                         </option>
                     </select>
+
                 </p>
                 Service
                 <p>

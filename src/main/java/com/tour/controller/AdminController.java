@@ -20,9 +20,6 @@ import java.util.stream.Stream;
 public class AdminController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private CountryRepository countryRepository;
 
     @Autowired

@@ -1,9 +1,6 @@
 package com.tour.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Tour {
@@ -12,7 +9,8 @@ public class Tour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID_Tour;
 
-    private Integer Total_Price;
+    @Column(name = "Total_Price")
+    private Integer price;
 
     private String Date_Start;
 
@@ -21,8 +19,8 @@ public class Tour {
     public Tour() {
     }
 
-    public Tour(Integer total_Price, String date_Start, String date_End) {
-        Total_Price = total_Price;
+    public Tour(Integer price, String date_Start, String date_End) {
+        this.price = price;
         Date_Start = date_Start;
         Date_End = date_End;
     }
@@ -35,12 +33,12 @@ public class Tour {
         this.ID_Tour = ID_Tour;
     }
 
-    public Integer getTotal_Price() {
-        return Total_Price;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setTotal_Price(Integer total_Price) {
-        Total_Price = total_Price;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public String getDate_Start() {
