@@ -54,15 +54,19 @@
                 <label th:text="${filter_price}"></label>
                 <label th:text="${depcity}"></label>
                 <div th:if="${tour.empty}">List is empty</div>
+
                 <div th:each="t: ${tour}">
-                    Some Tour #
-                    <div th:text="${t.ID_Tour} + ' Price: ' + ${t.Price}">
-                    </div>
+                    Tour
+                    <div th:text="${t.price}"></div>
+                    Tour Content
                     <div th:each="tc: ${tour_content}">
-                        Tour_Content
-                        <div th:text="'ID_City: '+${tc.ID_City}"></div>
+                        <div th:text="'ID_City: '+ ${tc.ID_City} +
+                                      ' City_Name: ' + ${tc.City_Name} + ' Total Price: '"
+                             th:if="${tc.ID_Tour} == ${t.ID_Tour}">
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

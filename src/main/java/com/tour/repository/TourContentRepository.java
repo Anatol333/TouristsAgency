@@ -1,5 +1,6 @@
 package com.tour.repository;
 
+import com.tour.domain.dto.TourDTO;
 import com.tour.domain.embeddable.EmbTour_Content;
 import com.tour.domain.Tour_Content;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,29 @@ public interface TourContentRepository extends JpaRepository<Tour_Content, EmbTo
 
     // Custo methods ...
 
-    @Query("SELECT tc from Tour_Content tc INNER JOIN City c ON tc.ID_City = c.ID_City " +
-            "where c.City_Name = :name")
-    List<Tour_Content> findCityCustomName(String name);
+    @Query("SELECT new com.tour.domain.dto.TourDTO(T1.ID_Tour, T1.ID_City, C1.City_Name) FROM City C1 INNER JOIN Tour_Content T1 on C1.ID_City = T1.ID_City" +
+            "  WHERE T1.ID_Tour IN (" +
+            "    SELECT T.ID_Tour " +
+            "    FROM City c" +
+            "           INNER JOIN Tour_Content T on c.ID_City = T.ID_City" +
+            "    WHERE :name IN (" +
+            "      SELECT c2.City_Name" +
+            "      FROM City c2," +
+            "           Tour_Content tc" +
+            "      WHERE c2.ID_City = tc.ID_City" +
+            "        AND c.ID_City = c2.ID_City" +
+            "    )" +
+            "  )" +
+            " ORDER BY T1.ID_Tour")
+    List<TourDTO> getListTourContentByName(String name);
+
+    @Query("SELECT new com.tour.domain.dto.TourDTO(T.ID_Tour, T.ID_City, c.City_Name) " +
+            " FROM City c INNER JOIN Tour_Content T on c.ID_City = T.ID_City" +
+            " WHERE c.City_Name IN (" +
+            "  SELECT c2.City_Name FROM City c2, Tour_Content tc" +
+            "  WHERE c2.ID_City = tc.ID_City" +
+            "  )" +
+            "ORDER BY T.ID_Tour")
+    List<TourDTO> getListTourContentAll();
+
 }
