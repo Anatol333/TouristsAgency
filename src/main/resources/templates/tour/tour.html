@@ -13,8 +13,7 @@
 <body>
 <!--START-->
 <div class="custom-my-container w-100">
-    <div th:object = "${tour}">
-
+    <div th:object="${tour}">
         <div class="row pl-2 mt-4">
             <div class="col-xl-4 col-md-6 col-xs-6 col-sm-6">
                 <img th:src="*{Photo}" class="img-fluid img-thumbnail" style="height: 350px; min-width: 400px;">
@@ -26,10 +25,15 @@
                 <h5 class="pt-5">Description :</h5>
                 <div th:text="*{Description}" class="pt-2"></div>
                 <div th:text="'Date Start: ' + *{Date_Start} + ' Date End: ' + *{Date_End} + ' Price: ' + *{price}"></div>
+                <h5 class="pt-2">You have the opportunity to see :</h5>
+                <ul>
+                    <div th:each="s: ${sight}">
+                        <li><div th:text="${s.Name_Sight}"></div></li>
+                    </div>
+                </ul>
                 <p><input type="submit" class="btn btn-outline-danger btn-rounded mt-4" value="More"></p>
             </div>
         </div>
-
     </div>
 </div>
 <!-- SCRIPTS -->

@@ -1,6 +1,7 @@
 package com.tour.controller;
 
 import com.tour.repository.CityRepository;
+import com.tour.repository.SightRepository;
 import com.tour.repository.TourContentRepository;
 import com.tour.repository.TourRepository;
 import org.hibernate.validator.constraints.EAN;
@@ -32,6 +33,9 @@ public class TourController {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private SightRepository sightRepository;
 
 
     @GetMapping("/buy")
@@ -80,6 +84,7 @@ public class TourController {
                 principal != null ? "ACCOUNT" : "SIGN IN");
 
         model.addAttribute("tour", tourRepository.findOneTourID(id));
+        model.addAttribute("sight", sightRepository.getListSightForTour(id));
 
         return "tour/tour";
     }

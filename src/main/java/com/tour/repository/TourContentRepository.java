@@ -1,5 +1,6 @@
 package com.tour.repository;
 
+import com.tour.domain.Sight;
 import com.tour.domain.dto.TourDTO;
 import com.tour.domain.embeddable.EmbTour_Content;
 import com.tour.domain.Tour_Content;
@@ -17,8 +18,8 @@ public interface TourContentRepository extends JpaRepository<Tour_Content, EmbTo
             "    SELECT T.ID_Tour " +
             "    FROM City c" +
             "           INNER JOIN Tour_Content T on c.ID_City = T.ID_City" +
-            "    WHERE :name IN (" +
-            "      SELECT c2.City_Name" +
+            "    WHERE :id = (" +
+            "      SELECT tc.ID_Tour" +
             "      FROM City c2," +
             "           Tour_Content tc" +
             "      WHERE c2.ID_City = tc.ID_City" +
@@ -26,7 +27,7 @@ public interface TourContentRepository extends JpaRepository<Tour_Content, EmbTo
             "    )" +
             "  )" +
             " ORDER BY T1.ID_Tour")
-    List<TourDTO> getListTourContentByName(String name);
+    TourDTO getListTourContentById(final Integer id);
 
     @Query("SELECT new com.tour.domain.dto.TourDTO(T.ID_Tour, T.ID_City, c.City_Name) " +
             " FROM City c INNER JOIN Tour_Content T on c.ID_City = T.ID_City" +
