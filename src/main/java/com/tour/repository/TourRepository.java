@@ -17,4 +17,13 @@ public interface TourRepository extends JpaRepository<Tour,Integer> {
     @Query("SELECT t FROM Tour t where t.price < :Price")
     List<Tour> customfind(Integer Price);
 
+    @Query("SELECT T FROM Tour T INNER JOIN Tour_Content TC on T.ID_Tour = TC.ID_Tour" +
+            " WHERE TC.ID_City IN (" +
+            "   SELECT TC2.ID_City FROM Tour_Content TC2 INNER JOIN City C on TC2.ID_City = C.ID_City" +
+            "   WHERE C.City_Name = :name" +
+            "   ) " +
+            "   AND T.price < :price" +
+            " ORDER BY T.ID_Tour")
+    List<Tour> findTourInCity(final String name, Integer price);
+
 }

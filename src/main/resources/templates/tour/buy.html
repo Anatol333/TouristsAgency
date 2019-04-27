@@ -31,40 +31,61 @@
                 <div class="pl-4">
                     <h3>Finding by filters:</h3>
 
-                    <div class="text-white pt-2 pb-2 align-items-center">
-                        Input city departure:
-                        <div class="search">
-                            <div class="d-flex justify-content-center">
-                                <input type="text" placeholder="Search . . ." required>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="text-white pt-2 pb-2 align-items-center">-->
+                    <!--Input city departure:-->
+                    <!--<div class="search">-->
+                    <!--<div class="d-flex justify-content-center">-->
+                    <!--<input type="text" placeholder="Search . . ." required>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                    <!--<input id="age" type="text" placeholder="age"/>-->
+                    <!--<input id="name" type="text" placeholder="name"/>-->
+                    <!--<a id="dynamic-url" href="/buy">-->
+                        <!--Submit-->
+                    <!--</a>-->
                     <div class="text-white pt-2 pb-2 align-items-center">
                         Less Than:
                         <div class="search">
                             <div class="d-flex justify-content-center">
-                                <input type="text" placeholder="Search . . ." required>
+                                <input id="price" type="text" placeholder="Search . . ." required>
                             </div>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-outline-danger btn-rounded" value="Search...">
+                    <div class="text-white pt-2 pb-2 align-items-center">
+                        Input city departure:
+                        <div class="search">
+                            <div class="d-flex justify-content-center">
+                                <input id="name" type="text" placeholder="Search . . ." required>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<a th:href="@{/buy/__${depcity}__}" class="btn btn-outline-danger btn-rounded">-->
+                        <!--<span>More</span>-->
+                    <!--</a>-->
+                    <!--<a th:href="@{'/buy/'+${depcity}}">Link</a>-->
+                    <a id="dynamic-url" class="btn btn-outline-danger btn-rounded" href="/buy">
+                        Submit
+                    </a>
                 </div>
             </div>
             <div class="col">
                 <label th:text="${filter_price}"></label>
-                <label th:text="${depcity}"></label>
+                <!--<label th:text="${depcity}"></label>-->
                 <div th:if="${tour.empty}">List is empty</div>
 
                 <div th:each="t: ${tour}">
-                    Tour
-                    <div th:text="${t.price}"></div>
-                    Tour Content
-                    <div th:each="tc: ${tour_content}">
-                        <div th:text="'ID_City: '+ ${tc.ID_City} +
-                                      ' City_Name: ' + ${tc.City_Name} + ' Total Price: '"
-                             th:if="${tc.ID_Tour} == ${t.ID_Tour}">
-                        </div>
-                    </div>
+                    <div th:text="'Tour №' + ${t.ID_Tour}"></div>
+                    <div th:text="'Date Start: ' + ${t.Date_Start} + ' Date End: ' + ${t.Date_End} + ' Price: ' + ${t.price}"></div>
+                    <!--Tour Content-->
+                    <!--<div th:each="tc: ${tour_content}">-->
+                    <!--<div th:text="'ID_City: '+ ${tc.ID_City} +-->
+                    <!--' City_Name: ' + ${tc.City_Name}"-->
+                    <!--th:if="${tc.ID_Tour} == ${t.ID_Tour}">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <input type="submit" class="btn btn-outline-danger btn-rounded" value="More">
                 </div>
 
             </div>
@@ -72,6 +93,7 @@
     </div>
 </div>
 <!-- SCRIPTS -->
+<script type="text/javascript" src="static/js/filter.js"></script>
 <!-- JQuery -->
 <script type="text/javascript" src="static/js/main-search.js"></script>
 
