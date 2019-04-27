@@ -34,8 +34,6 @@ public class TourController {
     private CityRepository cityRepository;
 
 
-
-
     @GetMapping("/buy")
     public String getBuyPage(Model model, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
@@ -51,7 +49,6 @@ public class TourController {
     }
 
     @GetMapping("/buy/{price}/{depcity}")
-//    @GetMapping("/buy/{price}")
     public String getBuyPage(@PathVariable("price") Integer price,
                              @PathVariable("depcity") String depcity,
                              Model model,
@@ -60,22 +57,31 @@ public class TourController {
         model.addAttribute("authButton",
                 principal != null ? "ACCOUNT" : "SIGN IN");
 
-        if(price == 0) price = Integer.MAX_VALUE;
+        if (price == 0) price = Integer.MAX_VALUE;
         model.addAttribute("filter_price", price);
-        if(depcity.equals("null")) {
+        if (depcity.equals("null")) {
             model.addAttribute("filter_price", price);
             model.addAttribute("tour", tourRepository.customfind(price));
         } else {
             model.addAttribute("filter_price", price);
             model.addAttribute("depcity", depcity);
-            model.addAttribute("tour", tourRepository.findTourInCity(depcity,price));
-           // model.addAttribute("tour_content", tourRepository.findTourInCity(depcity));
+            model.addAttribute("tour", tourRepository.findTourInCity(depcity, price));
+            // model.addAttribute("tour_content", tourRepository.findTourInCity(depcity));
         }
-//        //model.addAttribute("depcity", depcity);
-//        model.addAttribute("tour", tourRepository.customfind(price));
-//        //model.addAttribute("tour_content", tourContentRepository.getListTourContentByName(depcity));
-
         return "tour/buy";
+    }
+
+    @GetMapping("/buy/tour/{id}")
+    public String getOneTour(@PathVariable("id") Integer id,
+                             Model model,
+                             HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        model.addAttribute("authButton",
+                principal != null ? "ACCOUNT" : "SIGN IN");
+
+        model.addAttribute("tour", tourRepository.findOneTourID(id));
+
+        return "tour/tour";
     }
 
 }

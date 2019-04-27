@@ -26,4 +26,7 @@ public interface TourRepository extends JpaRepository<Tour,Integer> {
             " ORDER BY T.ID_Tour")
     List<Tour> findTourInCity(final String name, Integer price);
 
+    @Query("SELECT T FROM Tour T WHERE T.ID_Tour = :id")
+    Tour findOneTourID(final Integer id);
+
 }

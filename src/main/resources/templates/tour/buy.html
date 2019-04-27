@@ -55,7 +55,7 @@
                 <h5 class="pt-5">Description :</h5>
                 <div th:text="${t.Description}" class="pt-2"></div>
                 <div th:text="'Date Start: ' + ${t.Date_Start} + ' Date End: ' + ${t.Date_End} + ' Price: ' + ${t.price}"></div>
-                <p><input type="submit" class="btn btn-outline-danger btn-rounded mt-4" value="More"></p>
+                <p><a class="btn btn-outline-danger btn-rounded" href="#" th:href="@{'/buy/tour/'+${t.ID_Tour}}">More</a></p>
             </div>
         </div>
     </div>

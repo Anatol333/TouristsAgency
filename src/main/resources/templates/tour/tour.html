@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <div th:insert="static/head :: copy"></div>
+    <title>Material Design Bootstrap</title>
+</head>
+
+<header>
+    <div th:insert="static/header :: copy"></div>
+</header>
+
+<body>
+<!--START-->
+<div class="custom-my-container w-100">
+    <div th:object = "${tour}">
+
+        <div class="row pl-2 mt-4">
+            <div class="col-xl-4 col-md-6 col-xs-6 col-sm-6">
+                <img th:src="*{Photo}" class="img-fluid img-thumbnail" style="height: 350px; min-width: 400px;">
+            </div>
+            <div class="col-xl col-md col-xs-12 col-sm-12 ml-3">
+                <h3>
+                    <div th:text="'Tour №' + *{ID_Tour} + ' ' + *{Header_Name}"></div>
+                </h3>
+                <h5 class="pt-5">Description :</h5>
+                <div th:text="*{Description}" class="pt-2"></div>
+                <div th:text="'Date Start: ' + *{Date_Start} + ' Date End: ' + *{Date_End} + ' Price: ' + *{price}"></div>
+                <p><input type="submit" class="btn btn-outline-danger btn-rounded mt-4" value="More"></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="static/js/filter.js"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="static/js/main-search.js"></script>
+
+<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+</body>
+
+<!-- Footer -->
+<footer>
+    <div th:insert="static/footer :: copy"></div>
+</footer>
+
+</html>
