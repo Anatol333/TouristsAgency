@@ -83,8 +83,14 @@
             <h3>Add MAIN Tour</h3>
             <form action="#" th:action="@{/admin/tour}" th:object="${tour}" method="post">
                 <!--<p>Id Country: <input type="text" th:field="*{ID_Country}" /></p>-->
+                Photo (link)
+                <p><p><input type="text" th:field="*{Photo}"/></p></p>
                 Total Price Tour
                 <p><input type="text" th:field="*{Price}"/></p>
+                Header Name
+                <p><input type="text" th:field="*{Header_Name}"/></p>
+                Description
+                <p><textarea type="text" th:field="*{Description}" cols="40" rows="3"></textarea></p>
                 Date Start
                 <p><input type="text" th:field="*{Date_Start}"/></p>
                 Date End

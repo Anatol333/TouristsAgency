@@ -34,7 +34,7 @@ public class Tour {
         Description = description;
         Photo = photo;
     }
-    
+
     public Integer getID_Tour() {
         return ID_Tour;
     }
