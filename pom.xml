@@ -136,6 +136,7 @@
             <artifactId>assertj-core</artifactId>
         </dependency>
 
+
     </dependencies>
 
     <properties>

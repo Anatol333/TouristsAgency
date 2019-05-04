@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <div th:insert="static/head :: copy"></div>
+    <title>Tour registration</title>
+</head>
+
+<header>
+    <div th:insert="static/header :: copy"></div>
+</header>
+
+<body>
+<!--START-->
+<div class="custom-my-container w-100">
+    <div class="container">
+        <form action="#" th:action="@{/buy/tour/ordering}" th:object="${custom_check}" method="post">
+            <h3 class="text-center mt-2" th:text="${tour.Header_Name}"></h3>
+            <div class="row">
+                <div class="col-auto">
+                    <h4>TOUR</h4>
+                    Input date in range from
+                    <div th:text="${tour.Date_Start} + ' - ' + ${tour.Date_End}"></div>
+
+                    <p><input type="text" th:field="*{Custom_Date_Start}"/></p>
+                    <p><input type="text" th:field="*{Custom_Date_End}"/></p>
+
+                    <label class="mt-3">Check tour sights: </label>
+                    <ul>
+                        <li th:each="s : ${sights}">
+                            <input type="checkbox"
+                                   th:text="${s.Name_Sight}"
+                                   th:value="${s.ID_Sight}"
+                                   th:field="*{ID_Sight}"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-auto ml-5">
+                    <h4>HOTEL</h4>
+                    <p>Please, choose hotels, rooms and services.</p>
+                    <ul class="mt-2">
+                        <li th:each="h : ${just_hotel}">
+                            <input type="checkbox"
+                                   th:text="${h.Name_Hotel}"
+                                   th:value="${h.ID_Hotel}"
+                                   th:field="*{ID_Hotel}"/>
+                            <ul>
+                                <li th:each="r : ${rooms.?[ID_Hotel == __${h.ID_Hotel}__]}">
+                                    <input type="checkbox"
+                                           th:text="${r.ID_Room} + ' in ' + ${h.Name_Hotel}"
+                                           th:value="${r.ID_Room}"
+                                           th:field="*{ID_Room}"/>
+                                    <ul>
+                                        <li th:each="s : ${service.?[ID_Room == __${r.ID_Room}__]}">
+                                            <input type="checkbox"
+                                                   th:text="${s.Name_Service}"
+                                                   th:value="${s.ID_Service}"
+                                                   th:field="*{ID_Service}"/>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div th:text="'Total Price : '+${tour.price}"
+                 th:field="*{Custom_Price}"
+                 th:value="${tour.price}"
+                 class="text-center">
+            </div>
+            <div class="text-center py-4 mt-3 align-items-center">
+                <button class="btn btn-danger" type="submit">Buy</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="static/js/filter.js"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="static/js/main-search.js"></script>
+
+<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+</body>
+
+<!-- Footer -->
+<footer>
+    <div th:insert="static/footer :: copy"></div>
+</footer>
+
+</html>

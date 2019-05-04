@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TourContentRepository extends JpaRepository<Tour_Content, EmbTour_Content> {
 
-    // Custo methods ...
+    // Custom methods ...
 
     @Query("SELECT new com.tour.domain.dto.TourDTO(T1.ID_Tour, T1.ID_City, C1.City_Name) FROM City C1 INNER JOIN Tour_Content T1 on C1.ID_City = T1.ID_City" +
             "  WHERE T1.ID_Tour IN (" +
@@ -28,6 +28,16 @@ public interface TourContentRepository extends JpaRepository<Tour_Content, EmbTo
             "  )" +
             " ORDER BY T1.ID_Tour")
     TourDTO getListTourContentById(final Integer id);
+
+    @Query("SELECT c.ID_City " +
+            " FROM City c INNER JOIN Tour_Content T on c.ID_City = T.ID_City" +
+            " WHERE c.City_Name IN (" +
+            "  SELECT c2.City_Name FROM City c2, Tour_Content tc" +
+            "  WHERE c2.ID_City = tc.ID_City" +
+            "  ) AND T.ID_Tour = :id " +
+            "ORDER BY T.ID_Tour")
+    List<Integer> getListCityTourContentById(final Integer id);
+
 
     @Query("SELECT new com.tour.domain.dto.TourDTO(T.ID_Tour, T.ID_City, c.City_Name) " +
             " FROM City c INNER JOIN Tour_Content T on c.ID_City = T.ID_City" +

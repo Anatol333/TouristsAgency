@@ -28,5 +28,4 @@ public interface TourRepository extends JpaRepository<Tour,Integer> {
 
     @Query("SELECT T FROM Tour T WHERE T.ID_Tour = :id")
     Tour findOneTourID(final Integer id);
-
 }

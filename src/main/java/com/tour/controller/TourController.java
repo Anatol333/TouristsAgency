@@ -1,9 +1,10 @@
 package com.tour.controller;
 
-import com.tour.repository.CityRepository;
-import com.tour.repository.SightRepository;
-import com.tour.repository.TourContentRepository;
-import com.tour.repository.TourRepository;
+import com.tour.domain.City_Tour;
+import com.tour.domain.Custom_Check;
+import com.tour.domain.dto.CheckDTO;
+import com.tour.domain.dto.TourDTO;
+import com.tour.repository.*;
 import org.hibernate.validator.constraints.EAN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,7 +34,7 @@ public class TourController {
     private TourContentRepository tourContentRepository;
 
     @Autowired
-    private CityRepository cityRepository;
+    private RoomServiceRepository roomServiceRepository;
 
     @Autowired
     private SightRepository sightRepository;
@@ -87,6 +89,42 @@ public class TourController {
         model.addAttribute("sight", sightRepository.getListSightForTour(id));
 
         return "tour/tour";
+    }
+
+    @GetMapping("/buy/tour/{id}/checkout")
+    public String checkoutTour(@PathVariable("id") Integer id,
+                               Model model,
+                               HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        model.addAttribute("authButton",
+                principal != null ? "ACCOUNT" : "SIGN IN");
+
+        model.addAttribute("just_hotel", roomServiceRepository.getJustHotelInfo(
+                tourContentRepository.getListCityTourContentById(id)
+        ));
+        model.addAttribute("hotels", roomServiceRepository.getFullHotelInfo(
+                tourContentRepository.getListCityTourContentById(id)
+        ));
+        model.addAttribute("rooms", roomServiceRepository.getFullHotelInfo(
+                tourContentRepository.getListCityTourContentById(id)
+        ));
+        model.addAttribute("service", roomServiceRepository.getFullRoomInfo(
+                tourContentRepository.getListCityTourContentById(id)
+        ));
+        model.addAttribute("tour", tourRepository.findOneTourID(id));
+        model.addAttribute("custom_check", new CheckDTO());
+        model.addAttribute("sights", sightRepository.getListSightForTour(id));
+
+        return "tour/checkout";
+    }
+
+
+    @PostMapping("/buy/tour/ordering")
+    public String checkGetPost(@ModelAttribute CheckDTO checkDTO) {
+
+        System.out.println(checkDTO.getID_Sight().toString());
+
+        return "redirect:/";
     }
 
 }
