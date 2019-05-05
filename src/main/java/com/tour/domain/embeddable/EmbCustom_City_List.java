@@ -1,38 +1,29 @@
-package com.tour.domain;
+package com.tour.domain.embeddable;
 
-import com.tour.domain.embeddable.EmbCustom_Check;
-import com.tour.domain.embeddable.EmbCustom_City_List;
-
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "Custom_City_List")
-@IdClass(EmbCustom_City_List.class)
-public class Custom_City_List {
+@Embeddable
+public class EmbCustom_City_List implements Serializable {
 
-    @Id
     private Integer ID_Custom_City_List;
 
-    @Id
     private Integer ID_City_Tour;
 
-    @Id
     private Integer ID_Tour;
 
-    @Id
     private Integer id;
 
-    public Custom_City_List(Integer ID_Custom_City_List, Integer ID_City_Tour, Integer ID_Tour, Integer id) {
+
+    public EmbCustom_City_List(Integer ID_Custom_City_List, Integer ID_City_Tour, Integer ID_Tour, Integer id) {
         this.ID_Custom_City_List = ID_Custom_City_List;
         this.ID_City_Tour = ID_City_Tour;
         this.ID_Tour = ID_Tour;
         this.id = id;
     }
 
-    public Custom_City_List() {
+    public EmbCustom_City_List() {
     }
 
     public Integer getID_Custom_City_List() {

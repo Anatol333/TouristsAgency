@@ -14,4 +14,6 @@ public interface SightRepository extends JpaRepository<Sight, Integer> {
             "  AND CT.ID_Sight = S.ID_Sight"+
             " ORDER BY T.ID_Tour")
     List<Sight> getListSightForTour(final Integer id);
+
+
 }

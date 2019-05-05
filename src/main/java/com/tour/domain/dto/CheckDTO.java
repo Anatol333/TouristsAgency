@@ -8,6 +8,9 @@ import java.util.List;
 public class CheckDTO {
 
     // Tour
+    private Integer ID_Tour;
+
+    private Integer ID_User;
 
     private List<Integer> ID_Sight;
 
@@ -20,18 +23,42 @@ public class CheckDTO {
 
     // Hotel
 
-    private Integer ID_Hotel;
+    private List<Integer> ID_Hotel;
 
-    private Integer ID_Room;
+    private List<Integer> ID_Room;
 
-    private Integer ID_Service;
+    private List<Integer> ID_Service;
 
 
     public CheckDTO() {
     }
 
-    public CheckDTO(List<Integer> ID_Sight) {
+    public CheckDTO(Integer ID_Tour, Integer ID_User, List<Integer> ID_Sight, String custom_Price, String custom_Date_Start, String custom_Date_End, List<Integer> ID_Hotel, List<Integer> ID_Room, List<Integer> ID_Service) {
+        this.ID_Tour = ID_Tour;
+        this.ID_User = ID_User;
         this.ID_Sight = ID_Sight;
+        Custom_Price = custom_Price;
+        Custom_Date_Start = custom_Date_Start;
+        Custom_Date_End = custom_Date_End;
+        this.ID_Hotel = ID_Hotel;
+        this.ID_Room = ID_Room;
+        this.ID_Service = ID_Service;
+    }
+
+    public Integer getID_Tour() {
+        return ID_Tour;
+    }
+
+    public void setID_Tour(Integer ID_Tour) {
+        this.ID_Tour = ID_Tour;
+    }
+
+    public Integer getID_User() {
+        return ID_User;
+    }
+
+    public void setID_User(Integer ID_User) {
+        this.ID_User = ID_User;
     }
 
     public List<Integer> getID_Sight() {
@@ -40,11 +67,6 @@ public class CheckDTO {
 
     public void setID_Sight(List<Integer> ID_Sight) {
         this.ID_Sight = ID_Sight;
-    }
-
-    public CheckDTO(List<Integer> ID_Sight, String custom_Price) {
-        this.ID_Sight = ID_Sight;
-        Custom_Price = custom_Price;
     }
 
     public String getCustom_Price() {
@@ -71,27 +93,27 @@ public class CheckDTO {
         Custom_Date_End = custom_Date_End;
     }
 
-    public Integer getID_Hotel() {
+    public List<Integer> getID_Hotel() {
         return ID_Hotel;
     }
 
-    public void setID_Hotel(Integer ID_Hotel) {
+    public void setID_Hotel(List<Integer> ID_Hotel) {
         this.ID_Hotel = ID_Hotel;
     }
 
-    public Integer getID_Room() {
+    public List<Integer> getID_Room() {
         return ID_Room;
     }
 
-    public void setID_Room(Integer ID_Room) {
+    public void setID_Room(List<Integer> ID_Room) {
         this.ID_Room = ID_Room;
     }
 
-    public Integer getID_Service() {
+    public List<Integer> getID_Service() {
         return ID_Service;
     }
 
-    public void setID_Service(Integer ID_Service) {
+    public void setID_Service(List<Integer> ID_Service) {
         this.ID_Service = ID_Service;
     }
 

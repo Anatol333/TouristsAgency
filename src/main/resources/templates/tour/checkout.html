@@ -14,10 +14,15 @@
 <!--START-->
 <div class="custom-my-container w-100">
     <div class="container">
-        <form action="#" th:action="@{/buy/tour/ordering}" th:object="${custom_check}" method="post">
+        <form action="#" th:action="@{'/buy/tour/ordering/' + ${tour.ID_Tour}}" th:object="${custom_check}"
+              method="post">
             <h3 class="text-center mt-2" th:text="${tour.Header_Name}"></h3>
             <div class="row">
                 <div class="col-auto">
+                    <!--Private field-->
+                    <div th:field="*{ID_Tour}" th:value="${tour.ID_Tour}"></div>
+                    <input type="hidden" th:field="*{ID_User}" th:value="${user.id}" checked="checked"/>
+                    <!--<input type="hidden" th:field="*{ID_User}" th:value="${user.id}"/>-->
                     <h4>TOUR</h4>
                     Input date in range from
                     <div th:text="${tour.Date_Start} + ' - ' + ${tour.Date_End}"></div>
@@ -65,9 +70,8 @@
                 </div>
             </div>
             <div th:text="'Total Price : '+${tour.price}"
-                 th:field="*{Custom_Price}"
-                 th:value="${tour.price}"
                  class="text-center">
+                <input type="hidden" th:field="*{Custom_Price}" th:value="${tour.price}"/>
             </div>
             <div class="text-center py-4 mt-3 align-items-center">
                 <button class="btn btn-danger" type="submit">Buy</button>
