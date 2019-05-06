@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Embeddable
 public class EmbCustom_City_List implements Serializable {
 
-    private Integer ID_Custom_City_List;
+    private Integer ID_Custom_Tour_List;
 
     private Integer ID_City_Tour;
 
@@ -15,23 +15,22 @@ public class EmbCustom_City_List implements Serializable {
 
     private Integer id;
 
+    public EmbCustom_City_List() {
+    }
 
-    public EmbCustom_City_List(Integer ID_Custom_City_List, Integer ID_City_Tour, Integer ID_Tour, Integer id) {
-        this.ID_Custom_City_List = ID_Custom_City_List;
+    public EmbCustom_City_List(Integer ID_Custom_Tour_List, Integer ID_City_Tour, Integer ID_Tour, Integer id) {
+        this.ID_Custom_Tour_List = ID_Custom_Tour_List;
         this.ID_City_Tour = ID_City_Tour;
         this.ID_Tour = ID_Tour;
         this.id = id;
     }
 
-    public EmbCustom_City_List() {
+    public Integer getID_Custom_Tour_List() {
+        return ID_Custom_Tour_List;
     }
 
-    public Integer getID_Custom_City_List() {
-        return ID_Custom_City_List;
-    }
-
-    public void setID_Custom_City_List(Integer ID_Custom_City_List) {
-        this.ID_Custom_City_List = ID_Custom_City_List;
+    public void setID_Custom_Tour_List(Integer ID_Custom_Tour_List) {
+        this.ID_Custom_Tour_List = ID_Custom_Tour_List;
     }
 
     public Integer getID_City_Tour() {
