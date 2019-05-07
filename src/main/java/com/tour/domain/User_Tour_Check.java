@@ -12,12 +12,12 @@ import javax.persistence.*;
 public class User_Tour_Check {
 
     @Id
-    private Integer ID_Custom_Tour_List;
-
     private Integer ID_Room;
 
+    @Id
     private Integer ID_Service;
 
+    @Id
     private Integer ID_Hotel;
 
     @Id
@@ -26,8 +26,11 @@ public class User_Tour_Check {
     @Id
     private Integer id;
 
-    public User_Tour_Check(Integer ID_Custom_Tour_List, Integer ID_Room, Integer ID_Service, Integer ID_Hotel, Integer ID_Tour, Integer id) {
-        this.ID_Custom_Tour_List = ID_Custom_Tour_List;
+    public User_Tour_Check(Integer ID_Room,
+                           Integer ID_Service,
+                           Integer ID_Hotel,
+                           Integer ID_Tour,
+                           Integer id) {
         this.ID_Room = ID_Room;
         this.ID_Service = ID_Service;
         this.ID_Hotel = ID_Hotel;
@@ -36,15 +39,6 @@ public class User_Tour_Check {
     }
 
     public User_Tour_Check() {
-    }
-
-
-    public Integer getID_Custom_Tour_List() {
-        return ID_Custom_Tour_List;
-    }
-
-    public void setID_Custom_Tour_List(Integer ID_Custom_Tour_List) {
-        this.ID_Custom_Tour_List = ID_Custom_Tour_List;
     }
 
     public Integer getID_Room() {

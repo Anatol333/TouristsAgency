@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/",
                             "/auth",
                             "/buy",
-                            "/buy/tour/**",
+                            "/buy/tour/*",
                             "/about",
                             "/hot"
                     )
