@@ -1,16 +1,18 @@
 package com.tour.controller;
 
-import com.tour.domain.Custom_Check;
-import com.tour.domain.Sight_Custom_Check;
-import com.tour.domain.User;
-import com.tour.domain.User_Tour_Check;
+import com.tour.domain.*;
 import com.tour.domain.dto.CheckDTO;
 import com.tour.repository.*;
 import com.tour.service.UserService;
+import org.apache.commons.collections4.MultiMap;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +20,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class TourController {
 
     @Autowired
     private TourRepository tourRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     @Autowired
     private TourContentRepository tourContentRepository;
@@ -163,7 +171,6 @@ public class TourController {
                 // to Console
                 System.out.println(checkDTO.getID_Sight().get(i) + " "
                         + id + " " + user.getId());
-
                 // to Data Base
                 sightCustomCheckRepository.save(new Sight_Custom_Check(
                         checkDTO.getID_Sight().get(i), id, user.getId()
@@ -171,129 +178,29 @@ public class TourController {
             }
         }
 
-        if (checkDTO.getID_Hotel() != null) {
-            for (int i = 0; i < checkDTO.getID_Hotel().size(); ++i) {
-                for (int j = 0; j < checkDTO.getID_Room().size(); ++j) {
-                    int service = 0;
-                    int serviceNext = 0;
-                    if (isInList(checkDTO.getID_Room().get(j),
-                            userTourCheckRepository.findListHotelByID(i + 1)))
-//                        {
-//                            if (checkDTO.getID_Room() != null) {
-//                                for (int k = 0; k < checkDTO.getID_Service().size(); ++k) {
-//                                    if (isInList(checkDTO.getID_Service().get(k),
-//                                            userTourCheckRepository.findListServiceByID(
-//                                                    checkDTO.getID_Room().get(j)
-//                                            ))
-//                                    ) {
-//                                        // console Output
-//                                        System.out.println(checkDTO.getID_Hotel().get(i) + " "
-//                                                + checkDTO.getID_Room().get(j) + " "
-//                                                + checkDTO.getID_Service().get(k));
-//                                    }
-//                                }
-//                            }
-//                        }
-                        for (int k = 0; k < checkDTO.getID_Service().size(); ++k) {
-                            if (checkDTO.getID_Service().get(k).equals(checkDTO.getID_Service().get(j))) {
-                                service = checkDTO.getID_Service().get(k);
-                                if (service != serviceNext) {
-                                    // Out data to console
-                                    System.out.println(checkDTO.getID_Hotel().get(i) +
-                                            " - " + checkDTO.getID_Room().get(j) +
-                                            " - " + checkDTO.getID_Service().get(k));
-                                    // Out data to db
-                                    userTourCheckRepository.save(
-                                            new User_Tour_Check(
-                                                    checkDTO.getID_Room().get(j),
-                                                    checkDTO.getID_Service().get(k),
-                                                    checkDTO.getID_Hotel().get(i),
-                                                    id,
-                                                    user.getId()
-                                            )
-                                    );
-                                }
-                                serviceNext = checkDTO.getID_Service().get(k);
-                            }
-
-                        }
-                }
+        // Not parsed
+        System.out.println(checkDTO.getID_Service());
+        //Parsed
+        Pattern p = Pattern.compile("((.*?);(.*?);(.*?);)");
+        for (String service : checkDTO.getID_Service()) {
+            Matcher m = p.matcher(service);
+            while (m.find()) {
+                // Console Output
+                System.out.println("Hotel: " + m.group(2)
+                        + ", Room : " + m.group(3)
+                        + ", Service: " + m.group(4));
+                // DataBase Output
+                userTourCheckRepository.save(
+                        new User_Tour_Check(
+                                Integer.parseInt(m.group(3)),
+                                Integer.parseInt(m.group(4)),
+                                Integer.parseInt(m.group(2)),
+                                id,
+                                user.getId()
+                        )
+                );
             }
-
-//        // User Check (Middle table with info about hotel and service)
-//        Integer mainIdStart = userTourCheckRepository.findAll().size() + 1;
-//        Integer mainID = userTourCheckRepository.findAll().size() + 1;
-//
-//        for (int i = 0; i < checkDTO.getID_Hotel().size(); ++i) {
-//            for (int j = 0; j < checkDTO.getID_Room().size(); ++j) {
-//                int service;
-//                int serviceNext = 0;
-//                if (checkDTO.getID_Room().get(i).equals(checkDTO.getID_Room().get(j))) {
-////                 if (checkDTO.getID_Room().get(i).equals(checkDTO.getID_Room().get(j))) {
-////                if (checkDTO.getID_Room().get(j) != null) {
-//                    for (int k = 0; k < checkDTO.getID_Service().size(); ++k) {
-//                        if (checkDTO.getID_Service().get(k).equals(checkDTO.getID_Service().get(j))) {
-//                            service = checkDTO.getID_Service().get(k);
-//                            if (service != serviceNext) {
-//                                // Out data to console
-//                                System.out.println(checkDTO.getID_Hotel().get(i) +
-//                                        " - " + checkDTO.getID_Room().get(j) +
-//                                        " - " + checkDTO.getID_Service().get(k));
-//                                // Save Data to repository
-////                                userTourCheckRepository.save(
-////                                        new User_Tour_Check(
-////                                                mainID,
-////                                                checkDTO.getID_Room().get(j),
-////                                                checkDTO.getID_Service().get(k),
-////                                                checkDTO.getID_Hotel().get(i),
-////                                                id,
-////                                                user.getId()
-////                                        )
-////                                );
-////                                mainID++;
-//                            }
-//                            serviceNext = checkDTO.getID_Service().get(k);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        List<Integer> ctList = customCityListRepository.getListCityForUser(checkDTO.getID_Sight());
-//        // Custom User Sights from Tour (Last Table) "Custom City List"
-//        for (int i = mainIdStart; i < mainID; ++i) {
-//            for (int j = 0; j < ctList.size(); ++j) {
-//                customCityListRepository.save(new Custom_City_List(
-//                                i,
-//                                ctList.get(j),
-//                                id,
-//                                user.getId()
-//                        )
-//                );
-//               //System.out.println(id + " - " + i + " - " + ctList.get(j));
-//            }
-//        }
         }
-
         return "redirect:/acc";
     }
-
-
-    // Check for room
-    private boolean isInList(int ID_Room, List<Integer> roomHotel) {
-        for (int i = 0; i < roomHotel.size(); ++i) {
-            if (roomHotel.get(i) == ID_Room) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Check for services
-    private boolean isInRoom(Integer ID_Service, Integer room) {
-        if (userTourCheckRepository.findFignya(ID_Service, room) != null) {
-            return userTourCheckRepository.findFignya(ID_Service, room).equals(ID_Service);
-        }
-        return false;
-    }
-
 }

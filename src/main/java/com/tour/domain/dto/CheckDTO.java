@@ -3,6 +3,8 @@ package com.tour.domain.dto;
 import com.tour.domain.City_Tour;
 import com.tour.domain.Room_Service;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class CheckDTO {
@@ -27,7 +29,7 @@ public class CheckDTO {
 
     private List<Integer> ID_Room;
 
-    private List<Integer> ID_Service;
+    private List<String> ID_Service;
 
 
     public CheckDTO() {
@@ -42,8 +44,9 @@ public class CheckDTO {
         Custom_Date_End = custom_Date_End;
         this.ID_Hotel = ID_Hotel;
         this.ID_Room = ID_Room;
-        this.ID_Service = ID_Service;
+        //this.ID_Service = ID_Service;
     }
+
 
     public Integer getID_Tour() {
         return ID_Tour;
@@ -109,11 +112,11 @@ public class CheckDTO {
         this.ID_Room = ID_Room;
     }
 
-    public List<Integer> getID_Service() {
+    public List<String> getID_Service() {
         return ID_Service;
     }
 
-    public void setID_Service(List<Integer> ID_Service) {
+    public void setID_Service(List<String> ID_Service) {
         this.ID_Service = ID_Service;
     }
 

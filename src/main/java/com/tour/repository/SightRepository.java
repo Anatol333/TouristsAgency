@@ -4,6 +4,7 @@ import com.tour.domain.Sight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.xml.ws.Service;
 import java.util.List;
 
 public interface SightRepository extends JpaRepository<Sight, Integer> {
@@ -20,5 +21,11 @@ public interface SightRepository extends JpaRepository<Sight, Integer> {
             "  AND S.ID_City = T.ID_City" +
             " ORDER BY T.ID_Tour")
     List<Sight> getListSightForTour(final Integer id);
+
+
+    @Query("SELECT RS.ID_Service FROM Room_Service RS" +
+            " WHERE RS.ID_Service = :services AND " +
+            "       RS.ID_Room = :room")
+    Integer getListServiceInCity(final Integer services, final Integer room);
 
 }
