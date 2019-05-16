@@ -3,9 +3,11 @@ package com.tour.controller;
 
 import com.tour.domain.City;
 import com.tour.domain.Country;
+import com.tour.domain.Custom_Check;
 import com.tour.domain.User;
 import com.tour.repository.CityRepository;
 import com.tour.repository.CountryRepository;
+import com.tour.repository.Custom_CheckRepository;
 import com.tour.repository.UserRepository;
 import com.tour.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +34,27 @@ public class UserController {
     @Autowired
     private CityRepository cityRepository;
 
+    @Autowired
+    private Custom_CheckRepository custom_checkRepositoryk;
+
+    @Autowired
+    private UserRepository userRepository;
+
 
     @GetMapping("/acc")
     public String getAcc(Model model, Authentication authentication) {
         model.addAttribute("user", userService.loadUserByUsername(
                 authentication.getName()
+        ));
+
+        User user = userRepository.findOneBID(
+                userService.loadUserByUsername(
+                        authentication.getName()
+                ).getUsername()
+        );
+
+        model.addAttribute("user_tour", custom_checkRepositoryk.findByIdUser(
+                user.getId()
         ));
         return "user/acc";
     }

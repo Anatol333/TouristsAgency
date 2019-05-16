@@ -95,11 +95,21 @@
                         </div>
                         <!--something else...-->
                         <div role="tabpanel" class="tab-pane fade show" id="tours">
-                            Info about ticket
+                            <div th:each="ut: ${user_tour}">
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <h><div th:text="${ut.Header_Name}"></div></h>
+                                        <div th:text="${ut.Custom_Date_Start} + ' to ' + ${ut.Custom_Date_End}" class="mt-2"></div>
+                                    </div>
+                                    <div class="col">
+                                        <a th:href="@{'/buy/tour/'+${ut.ID_Tour}}" class="btn btn-outline-danger btn-rounded ml-4">Show</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!--<div class="tab-content">-->
-                        <!---->
+                    <!---->
                     <!--</div>-->
                 </div>
             </div>
