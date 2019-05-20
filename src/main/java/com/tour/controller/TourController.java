@@ -127,10 +127,10 @@ public class TourController {
         model.addAttribute("hotels", roomServiceRepository.getFullHotelInfo(
                 tourContentRepository.getListCityTourContentById(id)
         ));
-        model.addAttribute("rooms", roomServiceRepository.getFullHotelInfo(
+        model.addAttribute("rooms", roomServiceRepository.getJustRoomInfo(
                 tourContentRepository.getListCityTourContentById(id)
         ));
-        model.addAttribute("service", roomServiceRepository.getFullRoomInfo(
+        model.addAttribute("service", roomServiceRepository.getFullRoomInfoPrice(
                 tourContentRepository.getListCityTourContentById(id)
         ));
         model.addAttribute("user", userService.loadUserByUsername(

@@ -41,7 +41,7 @@
                     </ul>
                 </div>
                 <div class="col-auto ml-5">
-                    <h4>HOTEL</h4>
+                    <h4>HOTELS & SERVICES</h4>
                     <p>Please, choose hotels, rooms and services.</p>
                     <ul class="mt-2">
                         <li th:each="h : ${just_hotel}">
@@ -54,21 +54,18 @@
                                     <input type="checkbox"
                                            th:text="${r.ID_Room} + ' in ' + ${h.Name_Hotel}"
                                            th:value="${r.ID_Room}"
-                                           th:field="*{ID_Room}"/>
-                                    <!--<ul>-->
-                                        <!--<li th:each="s : ${service.?[ID_Room == __${r.ID_Room}__]}">-->
-                                            <!--<input type="checkbox"-->
-                                                   <!--th:text="${s.Name_Service}"-->
-                                                   <!--th:value="${s.ID_Service}"-->
-                                                   <!--th:field="*{ID_Service}"/>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
+                                           th:field="*{ID_Room}">
                                     <ul>
-                                        <li th:each="s : ${service.?[ID_Room == __${r.ID_Room}__]}">
-                                            <input type="checkbox"
+                                        <li th:each="s : ${service.?[ID_Room == __${r.ID_Room}__ ]}">
+                                            <input type="checkbox" class="sightsBox"
                                                    th:text="${s.Name_Service}"
                                                    th:value="${h.ID_Hotel}+';'+${r.ID_Room}+';'+${s.ID_Service}+';'"
-                                                   th:field="*{ID_Service}"/>
+                                                   th:field="*{ID_Service}"
+                                                   data-price="[[${s.Price_Service}]]"
+                                            />
+                                            <input type="hidden" class="checkValue"
+                                                   th:value="${s.Price_Service}"
+                                            />
                                         </li>
                                     </ul>
                                 </li>
@@ -77,9 +74,9 @@
                     </ul>
                 </div>
             </div>
-            <div th:text="'Total Price : '+${tour.price}"
-                 class="text-center">
-                <input type="hidden" th:field="*{Custom_Price}" th:value="${tour.price}"/>
+            <div th:text="${tour.price}"
+                 class="text-center" id="sightsPrice" type="text" th:value="${tour.price}">
+                <input id="hiddenPrice" type="hidden" th:field="*{Custom_Price}" th:value="${tour.price}"/>
             </div>
             <div class="text-center py-4 mt-3 align-items-center">
                 <button class="btn btn-danger" type="submit">Buy</button>
@@ -109,6 +106,30 @@
 <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+<script type="text/javascript">
+    var sightsBox = document.getElementsByClassName("sightsBox");
+    var checkValue = document.getElementsByClassName("checkValue");
+
+    for (var el = 0; el < sightsBox.length; ++el) {
+        sightsBox[el].addEventListener("click", function (evt) {
+            var price =[[${tour.price}]];
+
+            for (var i = 0; i < sightsBox.length; ++i) {
+                if (sightsBox[i].checked) {
+                    console.log(sightsBox[i].getAttribute("data-price"));
+                   // price += +sightsBox[i].getAttribute("data-price");
+                    price += +checkValue[i].value;
+                }
+            }
+
+            console.log(price);
+            document.getElementById("sightsPrice").innerText = ""+price;
+        })
+    }
+
+
+</script>
 
 </body>
 

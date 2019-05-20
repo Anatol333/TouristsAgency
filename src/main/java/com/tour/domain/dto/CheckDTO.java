@@ -3,6 +3,7 @@ package com.tour.domain.dto;
 import com.tour.domain.City_Tour;
 import com.tour.domain.Room_Service;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +22,6 @@ public class CheckDTO {
     private String Custom_Date_Start;
 
     private String Custom_Date_End;
-
 
     // Hotel
 

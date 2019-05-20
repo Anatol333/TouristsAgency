@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,7 +86,7 @@ public class AdminController {
         // Adding Hotel
         model.addAttribute("hotel", new Hotel());
         // Adding Room
-        model.addAttribute("room",new Room());
+        model.addAttribute("room", new Room());
         model.addAttribute("list_hotel", hotelRepository.findAll());
         model.addAttribute("list_type", roomTypeRepository.findAll());
         // Adding Room Type
@@ -102,7 +105,7 @@ public class AdminController {
     // Admin redirect pages
     @PostMapping("/admin/userrole")
     public String saveUserRole(@ModelAttribute UserRole userRole) {
-        if(userRoleRepository.findById(userRole.getUser_id()).get().getRoles() != userRole.getRoles()) {
+        if (userRoleRepository.findById(userRole.getUser_id()).get().getRoles() != userRole.getRoles()) {
             userRoleRepository.save(userRole);
         }
         return "redirect:/admin";
@@ -127,7 +130,11 @@ public class AdminController {
     }
 
     @PostMapping("/admin/tour")
-    public String saveTour(@ModelAttribute Tour tour) {
+    public String saveTour(@ModelAttribute Tour tour) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateString = format.format(new Date());
+        Date date = format.parse(tour.getDate_Start());
         tourRepository.save(tour);
         return "redirect:/admin";
     }
@@ -155,6 +162,7 @@ public class AdminController {
         roomTypeRepository.save(roomType);
         return "redirect:/admin";
     }
+
     @PostMapping("/admin/room")
     public String saveRoomType(@ModelAttribute Room room) {
         roomRepository.save(room);
@@ -166,6 +174,7 @@ public class AdminController {
         servicesRepository.save(services);
         return "redirect:/admin";
     }
+
     @PostMapping("/admin/room_services")
     public String saveServices(@ModelAttribute Room_Service room_service) {
         roomServiceRepository.save(room_service);
