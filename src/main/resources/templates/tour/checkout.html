@@ -22,7 +22,6 @@
                     <!--Private field-->
                     <div th:field="*{ID_Tour}" th:value="${tour.ID_Tour}"></div>
                     <input type="hidden" th:field="*{ID_User}" th:value="${user.id}" checked="checked"/>
-                    <!--<input type="hidden" th:field="*{ID_User}" th:value="${user.id}"/>-->
                     <h4>TOUR</h4>
                     Input date in range from
                     <div th:text="${tour.Date_Start} + ' - ' + ${tour.Date_End}"></div>
@@ -33,10 +32,15 @@
                     <label class="mt-3">Check tour sights: </label>
                     <ul>
                         <li th:each="s : ${sights}">
-                            <input type="checkbox"
+                            <input type="checkbox" class = "sightsBox"
                                    th:text="${s.Name_Sight}"
                                    th:value="${s.ID_Sight}"
-                                   th:field="*{ID_Sight}"/>
+                                   th:field="*{ID_Sight}"
+                                   sights-price = "[[${s.Local_Price}]]"
+                            />
+                            <input type="hidden" class="sightsValue"
+                                   th:value="${s.Local_Price}"
+                            />
                         </li>
                     </ul>
                 </div>
@@ -45,23 +49,28 @@
                     <p>Please, choose hotels, rooms and services.</p>
                     <ul class="mt-2">
                         <li th:each="h : ${just_hotel}">
-                            <input type="checkbox"
+                            <input type="checkbox" class = "sightsBox"
                                    th:text="${h.Name_Hotel}"
                                    th:value="${h.ID_Hotel}"
                                    th:field="*{ID_Hotel}"/>
                             <ul>
                                 <li th:each="r : ${rooms.?[ID_Hotel == __${h.ID_Hotel}__]}">
-                                    <input type="checkbox"
+                                    <input type="checkbox" class="roomBox"
                                            th:text="${r.ID_Room} + ' in ' + ${h.Name_Hotel}"
                                            th:value="${r.ID_Room}"
-                                           th:field="*{ID_Room}">
+                                           th:field="*{ID_Room}"
+                                           room-price="[[${r.Room_Price}]]"
+                                    />
+                                    <input type="hidden" class="checkValueRoom"
+                                           th:value="${r.Room_Price}"
+                                    />
                                     <ul>
                                         <li th:each="s : ${service.?[ID_Room == __${r.ID_Room}__ ]}">
-                                            <input type="checkbox" class="sightsBox"
+                                            <input type="checkbox" class="serviceBox"
                                                    th:text="${s.Name_Service}"
                                                    th:value="${h.ID_Hotel}+';'+${r.ID_Room}+';'+${s.ID_Service}+';'"
                                                    th:field="*{ID_Service}"
-                                                   data-price="[[${s.Price_Service}]]"
+                                                   service-price="[[${s.Price_Service}]]"
                                             />
                                             <input type="hidden" class="checkValue"
                                                    th:value="${s.Price_Service}"
@@ -75,17 +84,12 @@
                 </div>
             </div>
             <div th:text="${tour.price}"
-                 class="text-center" id="sightsPrice" type="text" th:value="${tour.price}">
+                 class="text-center" id="TotalPriceTour" type="text" th:value="${tour.price}">
                 <input id="hiddenPrice" type="hidden" th:field="*{Custom_Price}" th:value="${tour.price}"/>
             </div>
             <div class="text-center py-4 mt-3 align-items-center">
                 <button class="btn btn-danger" type="submit">Buy</button>
             </div>
-        </form>
-
-        <form action="#" th:action="@{'/buy/test_buy/ + ${tour.ID_Tour}}" th:object="${test_object}"
-              method="post">
-
         </form>
     </div>
 </div>
@@ -108,27 +112,57 @@
 <script type="text/javascript" src="static/js/mdb.min.js"></script>
 
 <script type="text/javascript">
-    var sightsBox = document.getElementsByClassName("sightsBox");
+    var serviceBox = document.getElementsByClassName("serviceBox");
     var checkValue = document.getElementsByClassName("checkValue");
 
-    for (var el = 0; el < sightsBox.length; ++el) {
-        sightsBox[el].addEventListener("click", function (evt) {
-            var price =[[${tour.price}]];
+    var sightsBox = document.getElementsByClassName("sightsBox");
+    var sightsValue = document.getElementsByClassName("sightsValue");
 
-            for (var i = 0; i < sightsBox.length; ++i) {
-                if (sightsBox[i].checked) {
-                    console.log(sightsBox[i].getAttribute("data-price"));
-                   // price += +sightsBox[i].getAttribute("data-price");
-                    price += +checkValue[i].value;
+    var TotalPrice = [[${tour.price}]];
+    var Sprice = 0;
+    for (var e = 0; e < sightsBox.length; ++e) {
+        sightsBox[e].addEventListener("click", function (evt) {
+            Sprice = [[${tour.price}]];
+            for (var j = 0; j < sightsBox.length; ++j) {
+                if (sightsBox[j].checked) {
+                    console.log(sightsBox[j].getAttribute("sights-price"));
+                    Sprice += +sightsValue[j].value;
                 }
             }
-
-            console.log(price);
-            document.getElementById("sightsPrice").innerText = ""+price;
+            console.log(Sprice);
+            document.getElementById("TotalPriceTour").innerText = "" + Sprice;
         })
     }
 
+    var roomBox = document.getElementsByClassName("roomBox");
+    var checkValueRoom = document.getElementsByClassName("checkValueRoom");
 
+    for (var el = 0; el < roomBox.length; ++el) {
+        roomBox[el].addEventListener("click", function (evt) {
+            var price = [[${tour.price}]];
+            for (var i = 0; i < roomBox.length; ++i) {
+                if (roomBox[i].checked) {
+                    console.log(roomBox[i].getAttribute("room-price"));
+                    price += +checkValueRoom[i].value;
+                }
+            }
+            for (var els = 0; els < serviceBox.length; ++els) {
+                serviceBox[els].addEventListener("click", function (evt) {
+                    var sightPrice = price;
+                    for (var j = 0; j < serviceBox.length; ++j) {
+                        if (serviceBox[j].checked) {
+                            console.log(serviceBox[j].getAttribute("service-price"));
+                            sightPrice += +checkValue[j].value;
+                        }
+                    }
+                    console.log(sightPrice);
+                    document.getElementById("TotalPriceTour").innerText = "" + sightPrice;
+                })
+            }
+            console.log(price);
+            document.getElementById("TotalPriceTour").innerText = "" + +(price + Sprice - TotalPrice);
+        })
+    }
 </script>
 
 </body>

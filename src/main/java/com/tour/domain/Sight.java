@@ -16,12 +16,15 @@ public class Sight {
 
     private Integer ID_City;
 
+    private Integer Local_Price;
+
     public Sight() {
     }
 
-    public Sight(String name_Sight, Integer ID_City) {
+    public Sight(String name_Sight, Integer ID_City, Integer local_Price) {
         Name_Sight = name_Sight;
         this.ID_City = ID_City;
+        Local_Price = local_Price;
     }
 
     public Integer getID_Sight() {
@@ -46,5 +49,13 @@ public class Sight {
 
     public void setID_City(Integer ID_City) {
         this.ID_City = ID_City;
+    }
+
+    public Integer getLocal_Price() {
+        return Local_Price;
+    }
+
+    public void setLocal_Price(Integer local_Price) {
+        Local_Price = local_Price;
     }
 }

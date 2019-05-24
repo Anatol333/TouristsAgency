@@ -54,9 +54,6 @@ public class TourController {
 
     @Autowired
     private UserTourCheckRepository userTourCheckRepository;
-//
-//    @Autowired
-//    private CustomCityListRepository customCityListRepository;
 
     @Autowired
     private SightCustomCheckRepository sightCustomCheckRepository;
@@ -93,7 +90,6 @@ public class TourController {
             model.addAttribute("filter_price", price);
             model.addAttribute("depcity", depcity);
             model.addAttribute("tour", tourRepository.findTourInCity(depcity, price));
-            // model.addAttribute("tour_content", tourRepository.findTourInCity(depcity));
         }
         return "tour/buy";
     }
@@ -157,11 +153,27 @@ public class TourController {
         );
 
         // User Main Check (Main custom info about user tour)
+        Integer price = tourRepository.findOneTourID(id).getPrice();
+        Pattern p = Pattern.compile("((.*?);(.*?);(.*?);)");
+        for (String service : checkDTO.getID_Service()) {
+            Matcher m = p.matcher(service);
+            while (m.find()) {
+                price += roomServiceRepository.getPriceServiceByID(
+                        Integer.parseInt(m.group(4))
+                );
+                price += roomServiceRepository.getPriceRoomByID(
+                        Integer.parseInt(m.group(3))
+                );
+            }
+        }
+        for (Integer idSight : checkDTO.getID_Sight()) {
+            price += roomServiceRepository.getPriceSightByID(idSight);
+        }
         custom_checkRepository.save(new Custom_Check(id,
                         user.getId(),
                         checkDTO.getCustom_Date_Start(),
                         checkDTO.getCustom_Date_End(),
-                        tourRepository.findOneTourID(id).getPrice().toString()
+                        price.toString()
                 )
         );
 
@@ -181,7 +193,7 @@ public class TourController {
         // Not parsed
         System.out.println(checkDTO.getID_Service());
         //Parsed
-        Pattern p = Pattern.compile("((.*?);(.*?);(.*?);)");
+        //p = Pattern.compile("((.*?);(.*?);(.*?);)");
         for (String service : checkDTO.getID_Service()) {
             Matcher m = p.matcher(service);
             while (m.find()) {

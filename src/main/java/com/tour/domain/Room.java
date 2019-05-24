@@ -1,15 +1,18 @@
 package com.tour.domain;
 
+import com.tour.domain.embeddable.EmbRoom;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Room")
+@IdClass(EmbRoom.class)
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID_Room;
 
+    @Id
     private Integer ID_Hotel;
 
     private Integer ID_Room_Type;

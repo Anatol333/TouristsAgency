@@ -21,7 +21,7 @@ public interface RoomServiceRepository
             "  AND H.ID_City IN :cities ")
     List<HotelDTO> getFullHotelInfo(final List<Integer> cities);
 
-    @Query("SELECT distinct new com.tour.domain.dto.RoomHotelDTO(R.ID_Room, H.ID_Hotel) FROM Room_Service RS, Hotel H, Services S, Room R " +
+    @Query("SELECT distinct new com.tour.domain.dto.RoomHotelDTO(R.ID_Room, H.ID_Hotel, R.Room_Price) FROM Room_Service RS, Hotel H, Services S, Room R " +
             " WHERE RS.ID_Hotel = H.ID_Hotel " +
             "  AND RS.ID_Room = R.ID_Room " +
             "  AND RS.ID_Service = S.ID_Service " +
@@ -57,4 +57,16 @@ public interface RoomServiceRepository
             "  AND RS.ID_Service = S.ID_Service " +
             "  AND H.ID_City IN :cities ")
     List<Integer> getJustServiceInfo(final List<Integer> cities);
+
+    @Query("SELECT S.Price_Service FROM Services S" +
+            " WHERE S.ID_Service = :id")
+    Integer getPriceServiceByID(final Integer id);
+
+    @Query("SELECT S.Room_Price FROM Room S" +
+            " WHERE S.ID_Room = :id")
+    Integer getPriceRoomByID(final Integer id);
+
+    @Query("SELECT S.Local_Price FROM Sight S" +
+            " WHERE S.ID_Sight = :id")
+    Integer getPriceSightByID(final Integer id);
 }

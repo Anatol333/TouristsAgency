@@ -165,6 +165,8 @@ public class AdminController {
 
     @PostMapping("/admin/room")
     public String saveRoomType(@ModelAttribute Room room) {
+        room.setID_Room(roomRepository
+                .getID_RoomInHotel(room.getID_Hotel()));
         roomRepository.save(room);
         return "redirect:/admin";
     }
